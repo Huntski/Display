@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: Raleway;
+    src: url("./assets/fonts/Raleway-ExtraLight.ttf");
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url("./assets/fonts/Raleway-Light.ttf");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url("./assets/fonts/Raleway-Regular.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url("./assets/fonts/Raleway-Bold.ttf");
+    font-weight: bold;
+}
