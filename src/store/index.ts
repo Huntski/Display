@@ -1,6 +1,7 @@
 import {createStore} from 'vuex'
 import ElectronStore from 'electron-store'
 import fs from 'fs'
+import anilist from './anilist'
 
 const store = new ElectronStore()
 
@@ -61,5 +62,7 @@ export default createStore({
         }
     },
 
-    modules: {}
+    modules: {
+        anilist
+    }
 })

@@ -4,6 +4,8 @@
     <div v-for="item in collection" :key="item">
       {{ item[0] }}
     </div>
+
+    <button @click="requestAnilist">REQUEST</button>
   </div>
 </template>
 
@@ -15,9 +17,16 @@ export default {
     }
   },
 
+  methods: {
+    requestAnilist() {
+      console.log(this.$store.dispatch('anilist/getThumbnail'))
+    }
+  },
+
   created() {
     console.log('COLLECTION LIST LOADED')
     console.log(this.collection)
+
   }
 }
 </script>
