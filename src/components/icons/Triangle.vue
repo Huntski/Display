@@ -4,7 +4,7 @@ $END$
 
 <script>
 export default {
-name: "FolderSelect.vue"
+name: "Triangle.vue"
 }
 </script>
 
