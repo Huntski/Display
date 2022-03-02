@@ -1,13 +1,10 @@
 <template>
-$END$
+  <svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Triangle</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Desktop-HD-Copy-2" transform="translate(-562.000000, -582.000000)" fill="#FFFFFF">
+        <polygon id="Triangle" transform="translate(569.000000, 589.000000) rotate(-270.000000) translate(-569.000000, -589.000000) " points="569 582 576 596 562 596"></polygon>
+      </g>
+    </g>
+  </svg>
 </template>
-
-<script>
-export default {
-name: "Triangle.vue"
-}
-</script>
-
-<style scoped>
-
-</style>

@@ -25,3 +25,21 @@
     src: url("./assets/fonts/Raleway-Bold.ttf");
     font-weight: bold;
 }
+
+.popup {
+    animation: popup 0.1s ease-out;
+}
+
+@keyframes popup {
+    0% {
+        transform: scaleZ(10%);
+    }
+
+    80% {
+        transform: translate3d(0, -10px, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
