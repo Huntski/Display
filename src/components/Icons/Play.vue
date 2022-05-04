@@ -1,0 +1,12 @@
+<template>
+  <svg viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Desktop-HD-Copy-8" transform="translate(-98.000000, -583.000000)">
+        <g id="Group-2" transform="translate(98.000000, 583.000000)">
+          <circle id="Oval" fill="#FFFFFF" cx="12.5" cy="12.5" r="12.5"></circle>
+          <polygon id="Triangle" fill="#000000" transform="translate(13.333333, 12.500000) rotate(-270.000000) translate(-13.333333, -12.500000) " points="13.3333333 9.16666667 16.6666667 15.8333333 10 15.8333333"></polygon>
+        </g>
+      </g>
+    </g>
+  </svg>
+</template>

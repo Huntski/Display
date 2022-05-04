@@ -27,19 +27,19 @@
 }
 
 .popup {
-    animation: popup 0.1s ease-out;
+    animation: popup .2s ease-out;
 }
 
 @keyframes popup {
     0% {
-        transform: scaleZ(10%);
+        transform: scale(90%);
     }
 
     80% {
-        transform: translate3d(0, -10px, 0);
+        transform: scale(110%);
     }
 
     100% {
-        transform: translate3d(0, 0, 0);
+        transform: scale(100%);
     }
 }

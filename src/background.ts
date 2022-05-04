@@ -3,6 +3,9 @@
 import {app, protocol, BrowserWindow, dialog, ipcMain} from 'electron'
 import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS3_DEVTOOLS} from 'electron-devtools-installer'
+import ElectronStore from 'electron-store'
+
+ElectronStore.initRenderer()
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -15,7 +18,8 @@ let mainWindow: any
 async function createWindow() {
     const window = new BrowserWindow({
         width: 1200,
-        height: 700,
+        height: 900,
+        minWidth: 900,
         webPreferences: {
             nodeIntegration: (process.env
                 .ELECTRON_NODE_INTEGRATION as unknown) as boolean,
@@ -31,17 +35,10 @@ async function createWindow() {
             properties: ['openDirectory']
         })
 
-        // const result = dialog.showOpenDialog(new BrowserWindow({width: 1, height: 1, show: false}), {
-        //     title: 'Select',
-        //     buttonLabel: 'Select directory',
-        //     properties: ['openDirectory']
-        // })
-
         return result
     })
 
     if (process.env.WEBPACK_DEV_SERVER_URL) {
-        // Load the url of the dev server if in development mode
         await window.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string)
         if (!process.env.IS_TEST) window.webContents.openDevTools()
     } else {

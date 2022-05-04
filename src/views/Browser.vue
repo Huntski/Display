@@ -1,22 +1,22 @@
 <template>
-  <div class="px-20 pt-10">
-    <Header />
+  <div>
+    <MediaHighlight />
 
-    <BrowserCollection />
+    <MediaCollection />
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header'
-import BrowserCollection from "@/components/BrowserCollection"
+import {MediaCollection} from "@/components/MediaCollection"
+import MediaHighlight from '@/components/MediaHighlight'
 
 export default {
-  created() {
-    console.log(this.$store.getters['directory'])
-
-    console.log(this.$store.dispatch('readDirectory'))
+  beforeMount() {
+    if (! this.$store.getters['media/getDirectoryFromStore']) {
+      this.$router.push({name: 'Home'})
+    }
   },
 
-  components: {Header, BrowserCollection}
+  components: {MediaCollection, MediaHighlight}
 }
 </script>

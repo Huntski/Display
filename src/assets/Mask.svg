@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1917px" height="1018px" viewBox="0 0 1917 1018" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Mask</title>
+    <defs>
+        <linearGradient x1="4.84594877%" y1="53.2121193%" x2="76.3751641%" y2="43.3783539%" id="linearGradient-1">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0.861526819" offset="17.632245%"></stop>
+            <stop stop-color="#000000" stop-opacity="0.402607697" offset="46.2802618%"></stop>
+            <stop stop-color="#000000" stop-opacity="0" offset="82.0700438%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" fill="url(#linearGradient-1)">
+            <path d="M-25.3364575,170.199909 C368.329998,277.642286 609.488854,290.27447 698.140108,208.096458 C786.791363,125.918447 933.899701,113.286264 1139.46512,170.199909 C1274.6703,195.464275 1404.17854,167.007452 1527.98986,84.829441 C1651.80118,2.65142955 1729.44813,-35.7991916 1760.9307,-30.5224225 L1964.23556,-21.1693545 L2043,985.478797 C1768.43988,871.131329 1573.96431,805.199858 1459.57328,787.684385 C1287.98673,761.411175 960.780922,604.334468 698.140108,671.131955 C435.499294,737.929441 465.773641,1090.87579 280.601339,974.313988 C157.153138,896.606118 21.6193579,957.501455 -126,1157 L-25.3364575,170.199909 Z" id="Mask"></path>
+        </g>
+    </g>
+</svg>

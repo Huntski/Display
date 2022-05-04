@@ -1,0 +1,15 @@
+<template>
+  <svg width="34px" height="34px" viewBox="0 0 34 34">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Desktop-HD-Copy-5" transform="translate(-972.000000, -131.000000)">
+        <g id="Group-6" transform="translate(972.000000, 131.000000)">
+          <circle id="Oval" fill="#272727" cx="17" cy="17" r="17"></circle>
+          <g id="Group-5" transform="translate(11.000000, 11.000000)" fill="#D8D8D8">
+            <polygon id="Rectangle" points="-2.69262796e-16 1.5483871 1.5483871 1.95254097e-16 12 10.4516129 10.4516129 12"></polygon>
+            <polygon id="Rectangle-Copy-11" points="10.4516129 2.88789969e-17 12 1.5483871 1.5483871 12 -2.46597401e-16 10.4516129"></polygon>
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</template>

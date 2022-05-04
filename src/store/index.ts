@@ -1,68 +1,41 @@
-import {createStore} from 'vuex'
-import ElectronStore from 'electron-store'
-import fs from 'fs'
-import anilist from './anilist'
+import Vuex from 'vuex'
+import anilist from '@/store/modules/anilist'
+import media from '@/store/modules/media'
+import anki from '@/store/modules/anki'
 
-const store = new ElectronStore()
-
-export default createStore({
+export default new Vuex.Store({
     state: {
         directory: '',
         collection: []
     },
 
     getters: {
-        directory(state) {
+        getStateDirectory(state) {
             return state.directory
         },
 
-        collection(state) {
+        getStateCollection(state) {
+            return state.collection
+        },
+
+        stateCollection(state) {
             return state.collection
         }
     },
 
     mutations: {
         SET_DIRECTORY(state, payload: string) {
-            console.log('MUTATE DIRECTORY')
             state.directory = payload
         },
 
         SET_COLLECTION(state, payload: any) {
-            console.log('MUTATE COLLECTION')
             state.collection = payload
         }
     },
 
-    actions: {
-        async setDirectory({ commit }, directory: string) {
-            console.log('ACTION SET DIRECTORY')
-            store.set('directory', directory)
-            return commit('SET_DIRECTORY', directory)
-        },
-
-        checkDirectory({commit}) {
-            console.log('ACTION CHECK DIRECTORY')
-            const directory = store.get('directory')
-            const directoryIsSet = directory ? true : false
-
-            if (directoryIsSet) {
-                commit('SET_DIRECTORY', directory)
-            }
-
-            return directoryIsSet
-        },
-
-        readDirectory({ state, commit }) {
-            const files = fs.readdirSync(state.directory, {withFileTypes: true})
-
-            const readCollection: any[] = files.filter((dirent: any) => dirent.isDirectory())
-                .map((dirent: any) => [dirent.name])
-
-            commit('SET_COLLECTION', readCollection)
-        }
-    },
-
     modules: {
-        anilist
+        anilist,
+        media,
+        anki
     }
 })

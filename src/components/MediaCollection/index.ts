@@ -1,0 +1,1 @@
+export { default as MediaCollection } from './MediaCollection.vue'
