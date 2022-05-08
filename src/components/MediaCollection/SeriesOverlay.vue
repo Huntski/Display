@@ -13,6 +13,13 @@
 
         <Exit class="absolute top-3 right-3 cursor-pointer" @click="$emit('close')" />
       </div>
+
+      <div>
+        <div v-for="(item, index) in episodes" :key="item.id">
+          {{item.id}}
+          {{index}}
+        </div>
+      </div>
     </div>
   </Popup>
 </template>
@@ -23,6 +30,12 @@ import {Exit} from '@/components/Icons'
 
 export default {
   props: ['media'],
+
+  computed: {
+    episodes() {
+      return this.media.episodes
+    }
+  },
 
   components: {Popup, Exit}
 }

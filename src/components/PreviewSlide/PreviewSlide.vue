@@ -36,8 +36,6 @@ export default {
     let topItem = slideItems[0]
 
     const move = (timestamp) => {
-      requestAnimationFrame(move)
-
       this.deltaTime = (this.timestamp - this.lastTimestamp) / this.perfectFrameTime
       this.lastTimestamp = this.timestamp
 
@@ -49,6 +47,8 @@ export default {
           topItem = item
         }
       })
+
+      setTimeout(_ => {requestAnimationFrame(move)}, 10)
     }
 
     setTimeout(() => {

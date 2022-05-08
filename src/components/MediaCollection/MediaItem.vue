@@ -1,6 +1,6 @@
 <template>
   <div v-bind:style="{ 'background-image': 'url(' + media.coverImage + ')' }"
-       class="w-72 h-96 rounded-md bg-gray-100 bg-no-repeat bg-cover bg-center border border-gray-100 transform transition hover:scale-105"
+       class="w-72 h-96 rounded-md bg-gray-100 bg-no-repeat bg-cover bg-center transform transition hover:scale-105"
   >
     <div class="opacity-0 hover:opacity-100 item-cover rounded-md flex items-center justify-center max-h-full h-full">
       <Play class="w-10"/>

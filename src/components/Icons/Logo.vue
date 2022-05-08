@@ -1,15 +1,14 @@
 <template>
-  <svg width="73px" height="73px" viewBox="0 0 73 73">
-    <title>Aayn Logo Copy</title>
+  <svg viewBox="0 0 47 47">
     <defs>
-      <linearGradient x1="80.0200184%" y1="3.11008963%" x2="50%" y2="100%" id="linearGradient-1">
-        <stop stop-color="#C981FF" offset="0%"></stop>
-        <stop stop-color="#3E42C1" offset="100%"></stop>
+      <linearGradient x1="47.0755482%" y1="-10.9781541%" x2="56.981266%" y2="104.132507%" id="linearGradient-1">
+        <stop stop-color="#FFF4AA" offset="0%"></stop>
+        <stop stop-color="#AC890D" offset="100%"></stop>
       </linearGradient>
     </defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g id="Desktop-HD-Copy-2" transform="translate(-80.000000, -269.000000)" fill="url(#linearGradient-1)" fill-rule="nonzero" stroke="#000000" stroke-width="5.7344">
-        <path d="M116.5,272 C135.001539,272 150,286.998461 150,305.5 C150,324.001539 135.001539,339 116.5,339 C97.9984609,339 83,324.001539 83,305.5 C83,286.998461 97.9984609,272 116.5,272 Z M116.408841,272.797619 C98.3981606,272.797619 83.797619,287.212667 83.797619,304.99453 C83.797619,313.919309 102.552907,310.947165 112.979233,300.619324 C123.326473,290.369822 125.379898,272.797619 116.408841,272.797619 Z" id="Aayn-Logo-Copy"></path>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0">
+      <g id="Desktop-HD-Copy-15" transform="translate(-81.000000, -290.000000)" fill="#000000" fill-rule="nonzero" stroke="url(#linearGradient-1)" stroke-width="3.136">
+        <path d="M104.5,292 C116.374122,292 126,301.625878 126,313.5 C126,325.374122 116.374122,335 104.5,335 C92.6258779,335 83,325.374122 83,313.5 C83,301.625878 92.6258779,292 104.5,292 Z M104.5,292.767857 C93.0499537,292.767857 83.7678571,302.049954 83.7678571,313.5 C83.7678571,319.246819 95.6912776,317.333004 102.319673,310.68273 C108.89779,304.0829 110.203228,292.767857 104.5,292.767857 Z" id="Oval-Copy-14"></path>
       </g>
     </g>
   </svg>

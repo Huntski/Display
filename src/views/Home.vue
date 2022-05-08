@@ -1,15 +1,15 @@
 <template>
-  <div class="flex container max-w-6xl m-auto h-screen ">
+  <div class="flex container max-w-6xl m-auto h-screen">
     <div class="pt-20 px-10">
       <h2 class="text-3xl font-extralight">Lets get started with</h2>
 
       <div class="flex items-center mt-5">
         <Logo class="w-16"/>
-        <span class="ml-5 text-5xl font-semibold text-purple-800">Display!</span>
+        <span class="ml-5 text-5xl font-semibold">Display!</span>
       </div>
 
       <p class="mt-10 text-sm">
-        A film mananger for your downloaded<br>
+        A simple manager for your downloaded<br>
         Movies, Anime, Series and more.
       </p>
 

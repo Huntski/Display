@@ -3,26 +3,26 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: Raleway;
-    src: url("./assets/fonts/Raleway-ExtraLight.ttf");
+    font-family: Kodchasan;
+    src: url("./assets/fonts/Kodchasan-ExtraLight.ttf");
     font-weight: 200;
 }
 
 @font-face {
-    font-family: Raleway;
-    src: url("./assets/fonts/Raleway-Light.ttf");
+    font-family: Kodchasan;
+    src: url("./assets/fonts/Kodchasan-Light.ttf");
     font-weight: 300;
 }
 
 @font-face {
-    font-family: Raleway;
-    src: url("./assets/fonts/Raleway-Regular.ttf");
+    font-family: Kodchasan;
+    src: url("./assets/fonts/Kodchasan-Regular.ttf");
     font-weight: normal;
 }
 
 @font-face {
-    font-family: Raleway;
-    src: url("./assets/fonts/Raleway-Bold.ttf");
+    font-family: Kodchasan;
+    src: url("./assets/fonts/Kodchasan-Bold.ttf");
     font-weight: bold;
 }
 
@@ -32,10 +32,6 @@
 
 @keyframes popup {
     0% {
-        transform: scale(90%);
-    }
-
-    80% {
         transform: scale(110%);
     }
 

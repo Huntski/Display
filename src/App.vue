@@ -1,12 +1,14 @@
 <template>
-  <div class="min-h-screen font-raleway" :style="{ backgroundColor: '#FCFCFC' }">
-    <Header v-if="$route.name !== 'Home'" />
-    <router-view/>
+  <div class="min-h-screen flex font-raleway text-white">
+    <SideNav v-if="$route.name !== 'Home'" />
+    <main class="m-auto">
+      <router-view/>
+    </main>
   </div>
 </template>
 
 <script>
-import {Header} from "@/components/Header"
+import {SideNav} from "@/components/SideNav"
 
 export default {
   created() {
@@ -15,6 +17,6 @@ export default {
     }
   },
 
-  components: {Header}
+  components: {SideNav}
 }
 </script>

@@ -2,6 +2,9 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 import Browser from '../views/Browser.vue'
 import Media from '../views/Media.vue'
+import Anki from '../views/Episode.vue'
+import Anilist from '../views/Anilist.vue'
+import Settings from '../views/Episode.vue'
 import Episode from '../views/Episode.vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -14,6 +17,26 @@ const routes: Array<RouteRecordRaw> = [
     path: '/browser',
     name: 'Browser',
     component: Browser
+  },
+  {
+    path: '/browser',
+    name: 'Browser',
+    component: Browser
+  },
+  {
+    path: '/anki',
+    name: 'Anki',
+    component: Anki
+  },
+  {
+    path: '/anilist',
+    name: 'Anilist',
+    component: Anilist
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: Settings
   },
   {
     path: '/media/:media_id',

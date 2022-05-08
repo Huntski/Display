@@ -2,7 +2,8 @@ import fs from "fs"
 import ElectronStore from "electron-store"
 import {Commit, Dispatch} from "vuex"
 import {MediaItem, AnlistMediaItem, MediaEpisode} from "@/types/Media"
-import { Path } from "@/types"
+import {Path} from "@/types"
+import {StateMedia as State} from "./types/StateMedia"
 
 const store = new ElectronStore
 
@@ -11,20 +12,24 @@ export default {
 
     state: {
         media: Array<MediaItem>()
-    },
+    } as State,
 
     getters: {
         getDirectoryFromStore(): Path {
             return store.get('directory') as Path
         },
 
-        getMediaFromStore(state: any): MediaItem[] {
+        getMediaFromStore(state: State): MediaItem[] {
             return state.media
-        }
+        },
+
+        getCurrentMedia(state: State) {
+            return store.get('currentMedia') as MediaItem | undefined
+        },
     },
 
     mutations: {
-        SET_MEDIA(state: any, payload: MediaItem[]) {
+        SET_MEDIA(state: State, payload: MediaItem[]) {
             state.media = payload
         }
     },
@@ -46,7 +51,8 @@ export default {
             return mediaCollection
         },
 
-        scanMediaInMainDirectory({ dispatch }: { dispatch: Dispatch }): MediaItem[] {
+        async scanMediaInMainDirectory({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }) {
+
             const directory = store.get('directory') as Path
 
             const directoryFiles = fs.readdirSync(directory, {withFileTypes: true})
@@ -54,9 +60,9 @@ export default {
             const directories = directoryFiles.filter((dirent) => dirent.isDirectory())
                 .map((dirent) => dirent.name)
 
-            const result: MediaItem[] = []
+            const result = Array<MediaItem>()
 
-            directories.forEach((title) => {
+            await directories.forEach((title) => {
                 dispatch('anilist/searchItem', title, {root:true}).then((media: AnlistMediaItem) => {
                     const episodes = Array<MediaEpisode>()
 
@@ -65,7 +71,6 @@ export default {
                     let order = 1;
                     episodeFiles.forEach((episode, index) => {
                         if (episode.name.includes('mp4') || episode.name.includes('mov')) {
-                            order++
                             episodes.push({
                                 id: order,
                                 media_id: media.id,
@@ -74,6 +79,7 @@ export default {
                                 fileName: `${episode.name}`,
                                 currentTime: 0
                             } as MediaEpisode)
+                            order++
                         }
                     })
 
@@ -85,10 +91,17 @@ export default {
                         title: media.title,
                         amount: media.episodes,
                         description: media.description,
-                        episodes: episodes
+                        episodes: episodes,
+                        currentEpisode: 1,
                     })
                 })
             })
+
+            store.set('media', result)
+
+            console.log('Finnish collection load')
+
+            await commit('SET_MEDIA', result)
 
             return result
         },
@@ -102,7 +115,17 @@ export default {
                 return state.media
             }
 
-            return state.media.filter((item: MediaItem) => item.title.romaji.toLowerCase().includes(query.toLowerCase()))
+            return state.media.filter((item: MediaItem) => {
+                if (item.title.romaji.toLowerCase().includes(query.toLowerCase())) {
+                    return true
+                }
+
+                if (item.id == parseInt(query)) {
+                    return true
+                }
+
+                return false
+            })
         },
 
         getMediaItem({ state }: { state: any }, id: number): MediaItem {

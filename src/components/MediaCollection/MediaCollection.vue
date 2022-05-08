@@ -16,7 +16,7 @@
     </div>
 
     <div class="grid grid-cols-4 2xl:grid-cols-3 gap-4 mt-10" v-if="! Object.keys(collection).length">
-      <div v-for="index in 7" :key="index" class="h-64 rounded-sm bg-gray-100"></div>
+      <div v-for="index in 7" :key="index" class="h-64 rounded-sm bg-gray-100" />
     </div>
 
     <SeriesOverlay v-if="selectedSeries" :media="selectedSeries" @close="selectedSeries = null" />
@@ -29,23 +29,25 @@ import SearchInput from "./SearchInput"
 import SeriesOverlay from './SeriesOverlay'
 
 export default {
+  props: {
+    collection: {
+      type: Array,
+      required: false
+    }
+  },
+
   data() {
     return {
-      collection: {},
       searchQuery: '',
       selectedSeries: null,
+      searchResult: {}
     }
   },
 
   methods: {
     async searchMedia() {
-      this.collection = await this.$store.dispatch('media/searchMediaTitle', this.searchQuery)
+      this.searchResult = await this.$store.dispatch('media/searchMediaTitle', this.searchQuery)
     }
-  },
-
-  async created() {
-    await this.$store.dispatch('media/updateMediaCollection')
-    this.collection = this.$store.getters['media/getMediaFromStore']
   },
 
   components: {MediaItem, SearchInput, SeriesOverlay},

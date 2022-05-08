@@ -1,0 +1,6 @@
+export {default as Home} from './Home.vue'
+export {default as Collection} from './Collection.vue'
+export {default as Notification} from './Notification.vue'
+export {default as Settings} from './Settings.vue'
+export {default as Anki} from './Anki.vue'
+export {default as Anilist} from './Anilist.vue'

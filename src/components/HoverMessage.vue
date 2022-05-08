@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <div class="absolute whitespace-nowrap rounded-full px-7 py-4 popup opacity-0 group-hover:opacity-100 group-hover:popup group-hover:popup pointer-events-none" :style="{...position, backgroundColor: '#FFDB49'}">
+    <div class="absolute whitespace-nowrap rounded-full px-7 py-4 popup opacity-0 group-hover:opacity-100 group-hover:popup group-hover:popup" :style="{...position, backgroundColor: '#FFDB49'}">
       <div class="connection absolute bottom-2/4 left-0"></div>
 
       <slot></slot>

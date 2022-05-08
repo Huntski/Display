@@ -8,8 +8,14 @@ export default {
 
     actions: {
         async checkPermission({ dispatch }: { dispatch: Dispatch }) {
-            const response = await dispatch('invoke', {action: 'requestPermission'})
-            return response.data.result.permission
+            try {
+                const response = await dispatch('invoke', {action: 'requestPermission'})
+                return response.data.result.permission
+            } catch (e) {
+                console.log(e)
+
+                return 'failed'
+            }
         },
 
         invoke(_: any, {action, params={}}: {action: AnkiAction, params: any}) {

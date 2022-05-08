@@ -1,0 +1,15 @@
+<template>
+  <svg viewBox="0 0 130 130">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Desktop-HD-Copy-10" transform="translate(-526.000000, -153.000000)">
+        <g id="Mark-Copy" transform="translate(526.000000, 153.000000)">
+          <circle id="Oval" fill="#FFB849" cx="65" cy="65" r="65"></circle>
+          <g id="Group-3" transform="translate(57.000000, 28.000000)" fill="#000000">
+            <rect id="Rectangle" x="2.66666667" y="0" width="10.6666667" height="46" rx="0.63"></rect>
+            <ellipse id="Oval" cx="8" cy="60.375" rx="8" ry="8.625"></ellipse>
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</template>

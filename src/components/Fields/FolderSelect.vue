@@ -1,5 +1,5 @@
 <template>
-  <input class="bg-white italic cursor-pointer text-sm font-raleway rounded px-5 py-4 border border-gray-300 w-80"
+  <input class="bg-regular-blue italic cursor-pointer text-sm font-raleway rounded px-5 py-4 w-80"
          type="text"
          :value="value"
          @click="openFolderSelect"

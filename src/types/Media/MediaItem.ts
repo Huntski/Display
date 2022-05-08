@@ -1,4 +1,4 @@
-import {MediaTitle, MediaEpisode} from "@/types/Media"
+import {MediaTitle, MediaEpisode, EpisodeId} from "@/types/Media"
 
 export interface MediaItem {
     id: number
@@ -8,5 +8,6 @@ export interface MediaItem {
     title: MediaTitle
     description: string
     amount: number
-    episodes: MediaEpisode[]
+    episodes: MediaEpisode[],
+    currentEpisode: EpisodeId,
 }
