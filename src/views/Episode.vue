@@ -2,8 +2,9 @@
   <div>
     <h1>{{ media.title.native }}</h1>
 
-    <video ref="video" width="320" height="240" class="bg-black" autoplay muted>
+    <video ref="video" width="320" height="240" class="bg-black" controls autoplay muted>
       <source type="video/mp4">
+      <track src="/captions_file.vtt" label="English" kind="captions" srclang="en-us" default >
     </video>
   </div>
 </template>

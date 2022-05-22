@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="23px" height="19px" viewBox="0 0 23 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Shape</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Artboard-Copy" transform="translate(-1123.000000, -71.000000)" stroke="#323648" stroke-width="2.2">
+            <path d="M1131.4,81.4 L1138,81.4 M1134.7,78.1 L1134.7,84.7 M1124.8,85.8 L1124.8,74.8 C1124.8,73.5849736 1125.78497,72.6 1127,72.6 L1133.6,72.6 L1135.8,74.8 L1142.4,74.8 C1143.61503,74.8 1144.6,75.7849736 1144.6,77 L1144.6,85.8 C1144.6,87.0150264 1143.61503,88 1142.4,88 L1127,88 C1125.78497,88 1124.8,87.0150264 1124.8,85.8 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'regular-blue': '#fff',
+        'regular-normal': '#323648',
+        'regular-lighter': '#464b67',
         'tabs-blue': '#fff',
         'primary-gold': '#B19017',
         'primary-gold-bright': '#d3ab16'
@@ -19,8 +20,8 @@ module.exports = {
       },
     },
     fontFamily: {
-      'primary': ['Kodchasan', 'Open Sans'],
-      'jap': ['Kyokasho']
+      'primary': ['Nunito', 'sans-serif'],
+      'jap': ['Kyokasho', 'sans-serif']
     },
   },
   plugins: [],

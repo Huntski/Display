@@ -38,12 +38,13 @@ export default {
         async updateMediaCollection({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }) {
             let mediaCollection = store.get('media') as MediaItem[]
 
+            mediaCollection = await dispatch('scanMediaInMainDirectory')
+
+            await new Promise(resolve => setTimeout(resolve, 1000))
+
+            store.set('media', mediaCollection)
+
             // if (!mediaCollection || mediaCollection.length < 1) {
-                mediaCollection = await dispatch('scanMediaInMainDirectory')
-
-                await new Promise(resolve => setTimeout(resolve, 1000))
-
-                store.set('media', mediaCollection)
             // }
 
             await commit('SET_MEDIA', mediaCollection)

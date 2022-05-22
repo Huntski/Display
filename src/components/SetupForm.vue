@@ -1,7 +1,7 @@
 <template>
   <div>
     <Popup v-show="showComplete">
-      <div class="popup bg-regular-blue rounded-md py-10 px-3 shadow-lg mt-20 px-20 z-20 text-center">
+      <div class="popup bg-regular-normal rounded-md py-10 px-3 shadow-lg mt-20 px-20 z-20 text-center">
         <div class="flex justify-center items-center relative">
           <h1 class="font-bold text-2xl">Tip for the future!</h1>
           <Fire class="text-red-500 transform rotate-12 ml-2"/>

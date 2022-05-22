@@ -11,4 +11,4 @@ export { default as Anilist } from './Anilist.vue'
 export { default as Check } from './Check.vue'
 export { default as Anki } from './Anki.vue'
 export { default as Warning } from './Warning.vue'
-
+export { default as Upload } from './Upload.vue'

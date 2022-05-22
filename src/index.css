@@ -2,40 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Primary Font. */
+
 @font-face {
-    font-family: Kodchasan;
+    font-family: Nunito;
     src: url("./assets/fonts/Nunito-ExtraLight.ttf");
     font-weight: 200;
 }
 
 @font-face {
-    font-family: Kodchasan;
+    font-family: Nunito;
     src: url("./assets/fonts/Nunito-Light.ttf");
     font-weight: 300;
 }
 
 @font-face {
-    font-family: Kodchasan;
+    font-family: Nunito;
     src: url("./assets/fonts/Nunito-Regular.ttf");
     font-weight: normal;
 }
 
 @font-face {
-    font-family: Kodchasan;
+    font-family: Nunito;
     src: url("./assets/fonts/Nunito-Bold.ttf");
     font-weight: bold;
 }
 
 @font-face {
-    font-family: Kodchasan;
+    font-family: Nunito;
     src: url("./assets/fonts/Nunito-ExtraBold.ttf");
     font-weight: 800;
 }
 
 @font-face {
+    font-family: Nunito;
+    src: url("./assets/fonts/Nunito-Black.ttf");
+    font-weight: 900;
+}
+
+/* Japanese Font. */
+
+@font-face {
     font-family: Kyokasho;
     src: url("./assets/fonts/YuKyo-Medium-AlphaNum-01.otf");
     font-weight: normal;
+}
+
+@font-face {
+    font-family: Kyokasho;
+    src: url("./assets/fonts/YuKyo-Bold-AlphaNum-02.otf");
+    font-weight: bold;
 }
 
 @font-face {

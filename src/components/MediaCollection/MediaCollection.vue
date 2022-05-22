@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-tabs-blue p-10 rounded-lg h-full">
+  <div class="rounded-lg h-full">
     <div class="grid grid-cols-4 lg:grid-cols-5 gap-4 mt-10">
       <MediaItem
           v-for="(item, index) in collection" :key="index" :media="item"
@@ -17,7 +17,6 @@
 
 <script>
 import MediaItem from './MediaItem'
-import SearchInput from "./SearchInput"
 import SeriesOverlay from './SeriesOverlay'
 
 export default {
@@ -36,12 +35,6 @@ export default {
     }
   },
 
-  methods: {
-    async searchMedia() {
-      this.searchResult = await this.$store.dispatch('media/searchMediaTitle', this.searchQuery)
-    }
-  },
-
-  components: {MediaItem, SearchInput, SeriesOverlay},
+  components: {MediaItem, SeriesOverlay},
 }
 </script>
