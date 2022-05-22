@@ -4,20 +4,16 @@
       <div class="h-52 rounded-t-2xl relative text-white w-full bg-no-repeat bg-cover" v-bind:style="{ 'background-image': 'url(' + media.coverImage + ')' }">
         <div class="absolute rounded-t-2xl cover top-0 px-10 left-0 w-full h-full">
           <h1 class="pt-14 text-xl font-light">Series</h1>
-          <h2 class="text-3xl">{{ media.title.native }}</h2>
-
-<!--          <button class="text-white rounded px-8 py-3 mt-5">-->
-<!--            Continue-->
-<!--          </button>-->
+          <h2 class="text-5xl font-jap">{{ media.title.native }}</h2>
         </div>
 
         <Exit class="absolute top-3 right-3 cursor-pointer" @click="$emit('close')" />
       </div>
 
-      <div>
-        <div v-for="(item, index) in episodes" :key="item.id">
-          {{item.id}}
-          {{index}}
+      <div class="flex">
+        <div v-for="(item) in episodes" :key="item.id" class="flex items-center justify-center rounded-lg">
+          <div class="w-full bg-primary-gold h-40" />
+          <span class="font-bold">{{item.id}}</span>
         </div>
       </div>
     </div>

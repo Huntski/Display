@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
+import Welcome from '../views/Welcome.vue'
 import Browser from '../views/Browser.vue'
 import Media from '../views/Media.vue'
 import Anki from '../views/Episode.vue'
@@ -10,8 +10,8 @@ import Episode from '../views/Episode.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Welcome',
+    component: Welcome
   },
   {
     path: '/browser',

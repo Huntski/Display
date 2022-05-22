@@ -1,4 +1,5 @@
-export {default as Home} from './Home.vue'
+export {default as Logo} from './Logo.vue'
+export {default as Welcome} from './Welcome.vue'
 export {default as Collection} from './Collection.vue'
 export {default as Notification} from './Notification.vue'
 export {default as Settings} from './Settings.vue'

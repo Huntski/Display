@@ -18,13 +18,13 @@
     <div class="flex align-middle">
       <h1 class="text-3xl font-bold">Set folder location</h1>
 
-      <Help color="#fff" class="w-9 ml-10 fill-current text-white"/>
+      <Help color="#000" class="w-9 ml-10"/>
     </div>
 
     <div class="flex mt-5">
       <FolderSelect v-model:value="fields.directory" />
 
-      <button class="bg-purple-400 p-5 ml-3 rounded" :class="{'pointer-events-none opacity-60' : ! fields.directory}" @click="setDirectory">
+      <button class="bg-black p-5 ml-3 rounded" :class="{'pointer-events-none opacity-60' : ! fields.directory}" @click="setDirectory">
         <Triangle/>
       </button>
 

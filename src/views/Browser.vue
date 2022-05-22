@@ -1,15 +1,11 @@
 <template>
-  <div v-if="loaded">
-    Test
-    <MediaHighlight v-if="highlight" :media="highlight"/>
-
-    <MediaCollection v-if="false" :collection="collection"/>
+  <div v-if="loaded" class="flex flex-wrap gap-x-20 flex-grow h-full">
+    <MediaCollection class="w-full" v-if="true" :collection="collection"/>
   </div>
 </template>
 
 <script>
 import {MediaCollection} from "@/components/MediaCollection"
-import {MediaHighlight} from '@/components/MediaHighlight'
 
 export default {
   data() {
@@ -23,21 +19,16 @@ export default {
 
   async created() {
     if (! this.$store.getters['media/getDirectoryFromStore']) {
-      await this.$router.push({name: 'Home'})
+      await this.$router.push({name: 'Welcome'})
     }
 
     this.$store.dispatch('media/updateMediaCollection').then(async response => {
       this.collection = response
+      this.highlight = this.collection[0]
+      this.loaded = true
     })
   },
 
-  mounted() {
-    this.highlight = this.collection.pop()
-    setTimeout(_ => {
-      this.loaded = true
-    }, 1)
-  },
-
-  components: {MediaCollection, MediaHighlight}
+  components: {MediaCollection}
 }
 </script>

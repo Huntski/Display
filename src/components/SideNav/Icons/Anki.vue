@@ -1,7 +1,7 @@
 <template>
   <svg viewBox="0 0 20 23">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-54.000000, -278.000000)" fill="#FFFFFF">
+      <g transform="translate(-54.000000, -278.000000)" fill="#000">
         <g transform="translate(30.000000, 33.000000)">
           <g transform="translate(21.279875, 244.200536)">
             <polygon transform="translate(10.756698, 14.143369) rotate(-30.000000) translate(-10.756698, -14.143369) " points="10.5792789 19.1816423 5.62366387 21.9584898 6.70069459 16.3254341 2.84799541 12.4578009 8.3337159 11.4954235 10.9082318 6.32824726 13.2215628 11.366521 18.6654004 12.0406637 14.6093971 16.1168655 15.3993578 21.7006848"></polygon>

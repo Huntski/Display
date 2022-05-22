@@ -18,7 +18,7 @@ let mainWindow: any
 async function createWindow() {
     const window = new BrowserWindow({
         width: 1200,
-        height: 900,
+        height: 1200,
         minWidth: 900,
         webPreferences: {
             nodeIntegration: (process.env

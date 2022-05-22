@@ -1,10 +1,10 @@
 <template>
-  <div class="relative bg-gray-100 font-bold italic text-sm font-raleway rounded border border-gray-300">
-    <input :value="value"
-           class="bg-transparent px-5 py-4 w-80"
-           @input="handleInput">
+  <div class="relative cursor-pointer bg-tabs-blue w-14 h-14 font-bold italic text-sm font-raleway rounded flex items-center justify-center">
+<!--    <input :value="value"-->
+<!--           class="bg-transparent px-5 py-4 w-80"-->
+<!--           @input="handleInput">-->
 
-    <Search class="absolute right-0 top-0 bottom-0 mt-auto mb-auto mr-5" />
+    <Search />
   </div>
 </template>
 

@@ -1,14 +1,18 @@
 <template>
-  <svg viewBox="0 0 47 47">
+  <svg viewBox="0 0 47 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
-      <linearGradient x1="47.0755482%" y1="-10.9781541%" x2="56.981266%" y2="104.132507%" id="linearGradient-1">
-        <stop stop-color="#FFF4AA" offset="0%"></stop>
-        <stop stop-color="#AC890D" offset="100%"></stop>
+      <linearGradient x1="80.0200184%" y1="3.11008963%" x2="44.4611816%" y2="104.961568%" id="linearGradient-1">
+        <stop stop-color="#4934FF" offset="0%"></stop>
+        <stop stop-color="#4934FF" offset="0.0686891178%"></stop>
+        <stop stop-color="#FF2C2C" offset="100%"></stop>
       </linearGradient>
     </defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0">
-      <g id="Desktop-HD-Copy-15" transform="translate(-81.000000, -290.000000)" fill="#000000" fill-rule="nonzero" stroke="url(#linearGradient-1)" stroke-width="3.136">
-        <path d="M104.5,292 C116.374122,292 126,301.625878 126,313.5 C126,325.374122 116.374122,335 104.5,335 C92.6258779,335 83,325.374122 83,313.5 C83,301.625878 92.6258779,292 104.5,292 Z M104.5,292.767857 C93.0499537,292.767857 83.7678571,302.049954 83.7678571,313.5 C83.7678571,319.246819 95.6912776,317.333004 102.319673,310.68273 C108.89779,304.0829 110.203228,292.767857 104.5,292.767857 Z" id="Oval-Copy-14"></path>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Desktop-HD-Copy-15" transform="translate(-81.000000, -290.000000)" fill-rule="nonzero" stroke="#000000" stroke-width="3.136">
+        <g id="Group-3" transform="translate(83.000000, 292.000000)">
+          <path d="M21.5,0 C33.3741221,0 43,9.62587788 43,21.5 C43,33.3741221 33.3741221,43 21.5,43 C9.62587788,43 0,33.3741221 0,21.5 C0,9.62587788 9.62587788,0 21.5,0 Z" id="Path" fill="url(#linearGradient-1)"></path>
+          <path d="M21.5,0.767857143 C10.0499537,0.767857143 0.767857143,10.0499537 0.767857143,21.5 C0.767857143,27.2468187 12.6912776,25.3330037 19.319673,18.6827297 C25.8977903,12.0828998 27.2032276,0.767857143 21.5,0.767857143 Z" id="Path" fill="#FFFFFF"></path>
+        </g>
       </g>
     </g>
   </svg>

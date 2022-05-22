@@ -1,14 +1,6 @@
 <template>
-  <div class="mt-10 px-20">
-    <div class="flex items-center">
-      <h1 class="text-3xl">My watch list</h1>
-
-      <div class="ml-auto">
-        <SearchInput v-model:value="searchQuery" @keydown.enter="searchMedia" />
-      </div>
-    </div>
-
-    <div class="grid grid-cols-4 lg:grid-cols-5 gap-4 mt-10" >
+  <div class="bg-tabs-blue p-10 rounded-lg h-full">
+    <div class="grid grid-cols-4 lg:grid-cols-5 gap-4 mt-10">
       <MediaItem
           v-for="(item, index) in collection" :key="index" :media="item"
           @click="selectedSeries = item"

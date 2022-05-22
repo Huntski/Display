@@ -1,7 +1,7 @@
 <template>
   <svg viewBox="0 0 20 15">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-54.000000, -185.000000)" fill="#FFFFFF" fill-rule="nonzero">
+      <g transform="translate(-54.000000, -185.000000)" fill="#000" fill-rule="nonzero">
         <g transform="translate(30.000000, 33.000000)">
           <g transform="translate(24.000000, 152.000000)">
             <path d="M0,2.5 C0,1.11928813 1.11928813,0 2.5,0 L7.5,0 L10,2.5 L15,2.5 C16.3807119,2.5 17.5,3.61928813 17.5,5 L17.5,6.25 L7.5,6.25 C5.42893219,6.25 3.75,7.92893219 3.75,10 L3.75,11.875 C3.74999998,12.9105339 2.9105339,13.75 1.875,13.75 C0.839466105,13.75 0,12.9105339 0,11.875 L0,2.5 Z" id="Path"></path>

@@ -1,12 +1,7 @@
 <template>
-  <svg viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g id="Desktop-HD-Copy-8" transform="translate(-98.000000, -583.000000)">
-        <g id="Group-2" transform="translate(98.000000, 583.000000)">
-          <circle id="Oval" fill="#FFFFFF" cx="12.5" cy="12.5" r="12.5"></circle>
-          <polygon id="Triangle" fill="#000000" transform="translate(13.333333, 12.500000) rotate(-270.000000) translate(-13.333333, -12.500000) " points="13.3333333 9.16666667 16.6666667 15.8333333 10 15.8333333"></polygon>
-        </g>
-      </g>
+  <svg viewBox="0 0 18 20" class="fill-current">
+    <g stroke="none" stroke-width="1">
+      <path d="M13.484954,4.77592645 L19.6340023,14.6144037 C20.6643427,16.2629483 20.1631892,18.4346137 18.5146446,19.464954 C17.9552053,19.8146036 17.3087657,20 16.6490483,20 L4.3509517,20 C2.40690938,20 0.830951698,18.4240423 0.830951698,16.48 C0.830951698,15.8202826 1.01634814,15.173843 1.36599767,14.6144037 L7.51504597,4.77592645 C8.54538634,3.12738186 10.7170517,2.62622832 12.3655963,3.65656869 C12.8188636,3.93986078 13.2016619,4.3226591 13.484954,4.77592645 Z" transform="translate(10.500000, 10.000000) rotate(-270.000000) translate(-10.500000, -10.000000) "></path>
     </g>
   </svg>
 </template>

@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'regular-blue': '#323648',
-        'tabs-blue': '#272A37',
+        'regular-blue': '#fff',
+        'tabs-blue': '#fff',
         'primary-gold': '#B19017',
         'primary-gold-bright': '#d3ab16'
       },
@@ -19,7 +19,8 @@ module.exports = {
       },
     },
     fontFamily: {
-      'raleway': ['Kodchasan', 'Open Sans']
+      'primary': ['Kodchasan', 'Open Sans'],
+      'jap': ['Kyokasho']
     },
   },
   plugins: [],

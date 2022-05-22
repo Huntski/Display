@@ -1,55 +1,47 @@
 <template>
-  <div class="side-nav"
-       :style="{transition: '500ms'}"
-       :class="{'open' : open}"
-  >
-    <router-link :to="{name: 'Home'}" class="logo">
-      <logo/>
-    </router-link>
-
-    <router-link :to="{name: 'Home'}">
-      <Home/>
-      <span>Home</span>
-    </router-link>
-
-    <router-link :to="{name: 'Browser'}">
-      <Collection/>
-      <span>Browser</span>
-    </router-link>
-
-    <router-link :to="{name: 'Anki'}">
-      <Anki/>
-      <span>Anki</span>
-    </router-link>
-
-    <router-link :to="{name: 'Anilist'}">
-      <Anilist/>
-      <span>Anilist</span>
-    </router-link>
-
-    <router-link :to="{name: 'Settings'}">
-      <Settings/>
-      <span>Settings</span>
-    </router-link>
-
-    <div class="notification">
-      <Notification/>
-    </div>
-
-    <div
-        class="expand-button"
-        :class="{'rotate-180' : open}"
-        @click="open = !open"
+  <div class="wrapper">
+    <div class="side-nav"
+         :style="{transition: '500ms'}"
+         :class="{'open' : open}"
     >
-      <div class="w-2 h-1 rounded-full bg-white transform rotate-45"/>
-      <div class="w-2 h-1 rounded-full bg-white transform rotate-135"/>
+      <router-link :to="{name: 'Browser'}" class="logo">
+        <logo/>
+      </router-link>
+
+      <router-link :to="{name: 'Browser'}">
+        <Collection/>
+      </router-link>
+
+      <router-link :to="{name: 'Anki'}">
+        <Anki/>
+      </router-link>
+
+      <router-link :to="{name: 'Anilist'}">
+        <Anilist/>
+      </router-link>
+
+      <router-link :to="{name: 'Settings'}">
+        <Settings/>
+      </router-link>
+
+      <div class="notification">
+        <Notification/>
+      </div>
+
+      <div
+          class="expand-button"
+          :class="{'rotate-180' : open}"
+          @click="open = !open"
+      >
+        <div class="w-2 h-1 rounded-full bg-white transform rotate-45"/>
+        <div class="w-2 h-1 rounded-full bg-white transform rotate-135"/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import {Logo} from "@/components/Icons";
-import {Home, Settings, Anilist, Anki, Collection, Notification} from '@/components/SideNav/Icons'
+import {Logo, Settings, Anilist, Anki, Collection, Notification} from '@/components/SideNav/Icons'
 
 export default {
   data() {
@@ -58,14 +50,18 @@ export default {
     }
   },
 
-  components: {Logo, Home, Settings, Anilist, Anki, Collection, Notification}
+  components: {Logo, Settings, Anilist, Anki, Collection, Notification}
 }
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+  @apply max-h-screen sticky left-0 top-0 box-border py-5
+}
+
 .side-nav {
   min-width: 95px;
-  @apply relative flex flex-col items-center bg-tabs-blue rounded-2xl shadow-3xl m-5 pt-5 sticky left-0 z-30;
+  @apply relative flex flex-col items-center rounded-lg py-5 z-30 h-full border-2 border-gray-100;
 
   &.open {
     align-items: flex-start;
@@ -99,11 +95,10 @@ export default {
 }
 
 a:not(.logo) {
-  @apply opacity-50 flex items-center py-4;
+  @apply opacity-40 flex items-center py-4;
 
   &:hover {
-    @apply opacity-100 rounded-2xl;
-    background: #1E202B;
+    @apply opacity-100 rounded-2xl bg-gray-100;
   }
 
   svg {
@@ -119,8 +114,7 @@ a:not(.logo) {
   @apply w-16 h-16 cursor-pointer opacity-50 flex items-center justify-center py-4 mb-3 mt-auto;
 
   &:hover {
-    @apply opacity-100 rounded-2xl;
-    background: #1E202B;
+    @apply opacity-100 rounded-2xl bg-gray-100;
   }
 
   svg {
@@ -131,10 +125,4 @@ a:not(.logo) {
     @apply hidden
   }
 }
-
-.expand-button {
-  @apply absolute top-20 cursor-pointer w-6 h-6 bg-primary-gold hover:bg-primary-gold-bright rounded-full flex flex-col items-center justify-center transform;
-  right: -15px;
-}
-
 </style>
