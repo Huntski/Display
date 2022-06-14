@@ -17,13 +17,6 @@ but then focused for downloaded content like anime.
 
 With this program you will be able to smoothly connect to [Anki](https://apps.ankiweb.net/), watch and make cards in a fly.
 
-<div>
+<div style="box-shadow: 0 3px 20px rgba(0,0,0,0.35)">
     <img width=1000px src="homepage-screenshot.png" />
-</div>
-
-<br>
-
-<div>
-    <p style="margin: 0; padding: 0; opacity: .8;">Example of the kind of card:</p>
-    <img width=400px src="card-screenshot.png" />
 </div>
