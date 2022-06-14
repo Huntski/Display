@@ -2,7 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Welcome from '../views/Welcome.vue'
 import Browser from '../views/Browser.vue'
 import Media from '../views/Media.vue'
-import Anki from '../views/Episode.vue'
+import Anki from '../views/Anki.vue'
 import Anilist from '../views/Anilist.vue'
 import Settings from '../views/Episode.vue'
 import Episode from '../views/Episode.vue'
@@ -12,11 +12,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Welcome',
     component: Welcome
-  },
-  {
-    path: '/browser',
-    name: 'Browser',
-    component: Browser
   },
   {
     path: '/browser',
@@ -48,7 +43,6 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Episode',
     component: Episode
   },
-
 ]
 
 const router = createRouter({

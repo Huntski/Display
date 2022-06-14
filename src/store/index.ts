@@ -1,6 +1,6 @@
 import Vuex from 'vuex'
 import anilist from '@/store/modules/anilist'
-import media from '@/store/modules/media'
+import media from '@/store/modules/media/media'
 import anki from '@/store/modules/anki'
 
 export default new Vuex.Store({

@@ -1,6 +1,6 @@
 <template>
-  <div class="w-60 item">
-    <div class="w-full h-80 rounded-md transform overflow-hidden transition cursor-pointer flex items-center justify-center">
+  <div class="w-60 h-72 item ">
+    <div class="rounded-md transform overflow-hidden transition cursor-pointer flex items-center justify-center">
       <img :src="media.coverImage" class="w-full transition" />
     </div>
   </div>

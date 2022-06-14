@@ -1,6 +1,6 @@
 <template>
   <Popup>
-    <div class="popup series mt-10 rounded-2xl z-10">
+    <div class="popup series mt-10 rounded-2xl z-50">
 
       <div class="h-52 rounded-t-2xl relative text-white w-full bg-no-repeat bg-cover bg-center" v-bind:style="{ 'background-image': 'url(' + media.coverImage + ')' }">
         <div class="absolute rounded-t-2xl cover top-0 px-10 left-0 w-full h-full">
@@ -12,19 +12,7 @@
       </div>
 
       <div class="grid grid-cols-3 gap-3 px-3 py-4">
-        <div
-            v-for="item in episodes"
-            @click="openEpisode(item)"
-            :key="item.id" class="cursor-pointer overflow-hidden media-item h-32 rounded-lg bg-white bg-center bg-cover relative"
-        >
-          <img :src="thumbnail" class="transition absolute object-cover h-full w-full" />
-
-          <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center"
-               style="background: rgba(0,0,0,0.28)"
-          >
-            <span class="font-bold text-white font-bold text-2xl relative">{{item.id}}</span>
-          </div>
-        </div>
+        <SeriesItem v-for="item in episodes" :key="item.id" :episode="item" />
       </div>
 
     </div>
@@ -34,6 +22,7 @@
 <script>
 import Popup from '@/components/Popup'
 import {Exit} from '@/components/Icons'
+import SeriesItem from './SeriesItem'
 
 export default {
   props: ['media'],
@@ -50,18 +39,7 @@ export default {
     }
   },
 
-  methods: {
-    openEpisode(episode) {
-      this.$router.push({
-        name: 'Episode', params: {
-          media_id: episode.media_id,
-          episode_id: episode.id
-        }
-      })
-    }
-  },
-
-  components: {Popup, Exit}
+  components: {Popup, Exit, SeriesItem}
 }
 </script>
 

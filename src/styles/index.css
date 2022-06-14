@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1 {
+    @apply text-3xl font-extrabold;
+}
+
+h2 {
+    @apply text-2xl font-bold;
+}
+
+p {
+    @apply mb-5;
+    color: #454545;
+}

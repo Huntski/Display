@@ -1,0 +1,1 @@
+export {default as AnkiStartProcess} from './AnkiStartProcess.vue'

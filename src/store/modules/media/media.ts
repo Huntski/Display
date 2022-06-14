@@ -1,11 +1,10 @@
 import fs from "fs"
-import ElectronStore from "electron-store"
+import storage from "@/store/modules/storage"
+import directory from "./directory"
 import {Commit, Dispatch} from "vuex"
 import {MediaItem, AnlistMediaItem, MediaEpisode} from "@/types/Media"
 import {Path} from "@/types"
 import {StateMedia as State} from "./types/StateMedia"
-
-const store = new ElectronStore
 
 export default {
     namespaced: true,
@@ -15,16 +14,12 @@ export default {
     } as State,
 
     getters: {
-        getDirectoryFromStore(): Path {
-            return store.get('directory') as Path
-        },
-
         getMediaFromStore(state: State): MediaItem[] {
             return state.media
         },
 
         getCurrentMedia(state: State) {
-            return store.get('currentMedia') as MediaItem | undefined
+            return storage.get('currentMedia') as MediaItem | undefined
         },
     },
 
@@ -36,16 +31,13 @@ export default {
 
     actions: {
         async updateMediaCollection({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }) {
-            let mediaCollection = store.get('media') as MediaItem[]
+            let mediaCollection = storage.get('media') as MediaItem[]
 
             mediaCollection = await dispatch('scanMediaInMainDirectory')
 
             await new Promise(resolve => setTimeout(resolve, 1000))
 
-            store.set('media', mediaCollection)
-
-            // if (!mediaCollection || mediaCollection.length < 1) {
-            // }
+            storage.set('media', mediaCollection)
 
             await commit('SET_MEDIA', mediaCollection)
 
@@ -54,7 +46,7 @@ export default {
 
         async scanMediaInMainDirectory({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }) {
 
-            const directory = store.get('directory') as Path
+            const directory = storage.get('directory') as Path
 
             const directoryFiles = fs.readdirSync(directory, {withFileTypes: true})
 
@@ -66,7 +58,7 @@ export default {
             await directories.forEach((title) => {
                 dispatch('anilist/searchItem', title, {root:true}).then((media: AnlistMediaItem) => {
                     const episodes = Array<MediaEpisode>()
-
+0
                     const episodeFiles = fs.readdirSync(`${directory}/${title}`, {withFileTypes: true})
 
                     let order = 1;
@@ -98,18 +90,13 @@ export default {
                 })
             })
 
-            store.set('media', result)
-
-            console.log('Finnish collection load')
+            storage.set('media', result)
 
             await commit('SET_MEDIA', result)
 
             return result
         },
 
-        storeDirectoryInStore(_: any, directory: Path): void {
-            store.set('directory', directory)
-        },
 
         searchMediaTitle({ state }: { state: any }, query: string): MediaItem[] {
             if (query === '') {
@@ -132,5 +119,9 @@ export default {
         getMediaItem({ state }: { state: any }, id: number): MediaItem {
             return state.media.filter((item: MediaItem) => id == item.id).pop()
         }
+    },
+
+    modules: {
+        directory
     }
 }

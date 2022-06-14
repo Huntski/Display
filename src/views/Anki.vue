@@ -1,11 +1,13 @@
 <template>
   <div>
-    Anki Config
+    <AnkiStartProcess />
   </div>
 </template>
 
 <script>
-export default {
+import {AnkiStartProcess} from '@/components/AnkiStartProcess'
 
+export default {
+  components: {AnkiStartProcess}
 }
 </script>

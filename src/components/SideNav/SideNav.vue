@@ -56,12 +56,12 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-  @apply max-h-screen sticky left-0 top-0 box-border py-5
+  @apply max-h-screen sticky left-0 top-0 box-border py-5 pl-5;
 }
 
 .side-nav {
   min-width: 95px;
-  @apply relative flex flex-col items-center rounded-lg py-5 z-30 h-full border-2 border-gray-100;
+  @apply relative flex gap-3 flex-col items-center rounded-lg py-5 z-30 h-full border-2 border-gray-100;
 
   &.open {
     align-items: flex-start;
@@ -97,6 +97,7 @@ export default {
 a:not(.logo) {
   @apply opacity-40 flex items-center py-4;
 
+  &.router-link-exact-active,
   &:hover {
     @apply opacity-100 rounded-2xl bg-gray-100;
   }

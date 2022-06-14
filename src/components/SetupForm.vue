@@ -38,7 +38,7 @@
 <script>
 import {Help, Fire, Spinner, Triangle} from '@/components/Icons'
 import Popup from '@/components/Popup'
-import FolderSelect from "@/components/Fields/FolderSelect"
+import {FolderSelect} from "@/components/Fields"
 
 export default {
   data() {

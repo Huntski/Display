@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loaded" class="flex flex-wrap gap-x-20 flex-grow h-full">
+  <div v-if="loaded" class="flex flex-wrap gap-x-20 flex-grow">
     <MediaCollection class="w-full" v-if="true" :collection="collection"/>
   </div>
 </template>

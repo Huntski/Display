@@ -4,7 +4,7 @@
 
     <Spinner class="w-4" v-show="! status" />
 
-    <Check class="w-4 text-green fill-current text-green-50" v-show="status === 'granted'" />
+    <Check class="w-4 fill-current text-green-50" v-show="status === 'granted'" />
     <Warning class="w-5 text-green fill-current text-green-50" v-show="status === 'failed'" />
 
     <HoverMessage located="bottom-right">{{ message }}</HoverMessage>
