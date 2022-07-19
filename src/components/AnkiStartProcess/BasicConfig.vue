@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h2>Basic Configuration</h2>
+
     <p class="mt-5">To which deck should the new cards be uploaded to.</p>
     <Select class="mb-10" :options="deckNames" v-model:value="form.deck" />
 
@@ -34,12 +36,7 @@ export default {
         await this.$store.dispatch('anki/deck/updateDeckInUse', this.form.deck)
         await this.$store.dispatch('anki/notetype/updateNoteTypeInUse', this.form.note_type)
 
-        const noteTypeInUse = await this.$store.getters['anki/notetype/noteTypeInUse']
-        const deckInUse = await this.$store.getters['anki/deck/deckInUse']
-
-        if (noteTypeInUse === this.form.deck && deckInUse === this.form.note_type) {
-          this.$emit('update:status', true)
-        }
+        this.$emit('update:status', true)
       } catch (e) {
         console.log(e)
       }

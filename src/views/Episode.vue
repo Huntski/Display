@@ -4,7 +4,9 @@
         <Return class="w-7" />
       </router-link>
 
-      <video @timeupdate="processBar" ref="video" class="w-full" autoplay @click="togglePlay" muted />
+      <video @timeupdate="processBar" ref="video" class="w-full" autoplay @click="togglePlay" muted>
+        <track ref="subs" src="" kind="subtitles" srclang="en" label="English">
+      </video>
 
       <div class="w-full text-white absolute bottom-0 flex flex-col items-center h-40">
         <div class="w-3/4 flex flex-col items-center h-40">
@@ -40,7 +42,7 @@
 
 <script>
 import fs from 'fs'
-import {Return, Play, Pause, Sound, Mute} from '@/components/Icons'
+import {Mute, Pause, Play, Return, Sound} from '@/components/Icons'
 
 export default {
   data() {
@@ -107,9 +109,12 @@ export default {
 
   mounted() {
     try {
-      const file = fs.readFileSync(this.media.episodes[0].fullPath)
-      this.fileURL = URL.createObjectURL(new Blob([file]))
+      const videoFile = fs.readFileSync(this.media.episodes[0].fullPath)
+      this.fileURL = URL.createObjectURL(new Blob([videoFile]))
       this.$refs.video.src = this.fileURL
+
+      const subtitleFile = fs.readFileSync('/Users/wieb/Documents/Films/憑物語/Tsukimonogatari - 01 (BD 1280x720 AVC AACx2).srt')
+      this.$refs.subs.src = URL.createObjectURL(new Blob([subtitleFile]))
     } catch (e) {
       console.log(e)
     }

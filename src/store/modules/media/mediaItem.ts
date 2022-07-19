@@ -1,7 +1,5 @@
 export default {
     namespaced: true,
 
-    actions: {
-        
-    }
+    actions: {}
 }

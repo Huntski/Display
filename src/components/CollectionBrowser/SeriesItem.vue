@@ -1,19 +1,22 @@
 <template>
   <div
-      @click="openEpisode()" class="cursor-pointer overflow-hidden media-item h-32 rounded-lg bg-white bg-center bg-cover relative"
+      @click="openEpisode()"
+      class="cursor-pointer overflow-hidden media-item h-32 rounded-lg bg-white bg-center bg-cover relative"
       ref="seriesItem"
   >
-    <img :src="thumbnail" class="transition absolute object-cover h-full w-full" />
+    <img :src="thumbnail" class="transition absolute object-cover h-full w-full"/>
 
     <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center"
          style="background: rgba(0,0,0,0.28)"
     >
-      <span class="font-bold text-white font-bold text-2xl relative">{{episode.id}}</span>
+      <span class="font-bold text-white font-bold text-2xl relative">{{ episode.id }}</span>
     </div>
   </div>
 </template>
 
 <script>
+import fs from 'fs'
+
 export default {
   props: ['episode'],
 
@@ -34,37 +37,57 @@ export default {
       })
     },
 
-    uploadSubtitles(files) {
-      const media = this.$store.getters['media/getMediaFromStore']
+    storeSubtitles() {
 
-      // Loop through all the media collection.
-      for (let i = 0; i < media.length; i++ ) {
+      console.log(this.files)
+      // fs.readFile(files.image.path, function (err, data) {
+      //
+      //   var imageName = req.files.image.name
+      //
+      //   /// If there's an error
+      //   if(!imageName){
+      //
+      //     console.log("There was an error")
+      //     // res.redirect("/")
+      //     // res.end()
+      //
+      //   } else {
+      //
+      //     var newPath = __dirname + "/uploads/fullsize/" + imageName
+      //
+      //     /// write file to uploads/fullsize folder
+      //     fs.writeFile(newPath, data, function (err) {
+      //
+      //       /// let's see it
+      //       res.redirect("/uploads/fullsize/" + imageName)
+      //
+      //     });
+      //   }
+      // })
+    },
 
-        /* Check if media.id is equal to current route media_id. */
-        if (media[i].id === this.episode.media_id) {
+    async uploadSubtitles(files) {
+      files.forEach(file => {
+        console.log(file.path)
 
-          /* Loop through all the media's episodes. */
-          for (let e = 0; e < this.media[i].episodes; e++) {
+        fs.readFile(file.path, function (err, data) {
+          const fileName = file.name
 
-            /* Add dropped files to episode.subtitles. */
-            if (this.media[i].episodes[i].id === this.episode.id) {
-              for (let i = 0; i < files.length; i++) {
-                this.media[i].episodes[i].subtitles.push({
-                  src: 'files'
-                })
-              }
-            }
+          try {
+            console.log(__dirname)
+          } catch (e) {
+            console.log(e)
           }
-        }
-      }
+        })
+      })
 
-
+      const media = await this.$store.getters['media/']
     }
   },
 
   mounted() {
-    ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach( function( evt ) {
-      this.$refs.seriesItem.addEventListener(evt, function(e){
+    ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(function (evt) {
+      this.$refs.seriesItem.addEventListener(evt, function (e) {
         e.preventDefault()
         e.stopPropagation()
       }.bind(this), false)

@@ -1,7 +1,8 @@
 import Vuex from 'vuex'
 import anilist from '@/store/modules/anilist'
-import media from '@/store/modules/media/media'
+import media from '@/store/modules/media'
 import anki from '@/store/modules/anki'
+import episode from '@/store/modules/episode'
 
 export default new Vuex.Store({
     state: {
@@ -36,6 +37,7 @@ export default new Vuex.Store({
     modules: {
         anilist,
         media,
-        anki
+        anki,
+        episode,
     }
 })

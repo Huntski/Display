@@ -1,11 +1,11 @@
 <template>
   <div v-if="loaded" class="flex flex-wrap gap-x-20 flex-grow">
-    <MediaCollection class="w-full" v-if="true" :collection="collection"/>
+    <CollectionBrowser class="w-full" :collection="collection"/>
   </div>
 </template>
 
 <script>
-import {MediaCollection} from "@/components/MediaCollection"
+import {CollectionBrowser} from "@/components/CollectionBrowser"
 
 export default {
   data() {
@@ -22,13 +22,18 @@ export default {
       await this.$router.push({name: 'Welcome'})
     }
 
-    this.$store.dispatch('media/updateMediaCollection').then(async response => {
-      this.collection = response
-      this.highlight = this.collection[0]
-      this.loaded = true
-    })
+    if (this.$store.getters['media/hasMediaCollection']) {
+      this.collection = await this.$store.dispatch('media/updateMediaCollection')
+    } else {
+      this.collection = this.$store.getters['media/getMediaCollection']
+    }
+
+    this.highlight = this.collection[0]
+    this.loaded = true
+
+
   },
 
-  components: {MediaCollection}
+  components: {CollectionBrowser}
 }
 </script>

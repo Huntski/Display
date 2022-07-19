@@ -1,6 +1,9 @@
 <template>
   <div class="mt-10">
-    <p>By settings up Anki, you will be able to make new flash cards from the words and sentences you want to learn, while watching any show, movie or anime with subtitles.</p>
+    <h2>Get started with Anki</h2>
+
+    <p>By settings up Anki, you will be able to make new flash cards from the words and sentences you want to learn,
+      while watching any show, movie or anime with subtitles.</p>
 
     <div class="flex items-center my-10 py-10 border-t border-b border-gray-300">
       <div class="w-7 h-7">
@@ -51,23 +54,27 @@ export default {
   },
 
   methods: {
-    async check() {
+    async check(){
       this.status = 'loading'
+      let permissionCheck = null
 
-      let permissionCheck = await this.$store.dispatch('anki/checkPermission')
+      try {
+        permissionCheck = await this.$store.dispatch('anki/checkPermission')
+      } catch (e) {
+        console.log(e)
+        permissionCheck = 'failed'
+      }
 
       setTimeout(() => {
         this.status = permissionCheck
 
-        console.log('ANKI STATUS', this.status)
-
         let response = null
 
-        if (this.status == 'granted') {
+        if (this.status === 'granted') {
           response = true
         }
 
-        if (this.status == 'failed') {
+        if (this.status === 'failed') {
           response = false
         }
 

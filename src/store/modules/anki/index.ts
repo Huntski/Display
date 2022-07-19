@@ -2,6 +2,7 @@ import axios from 'axios'
 import {Dispatch} from "vuex"
 import deck from './deck'
 import notetype from './notetype'
+import storage from "@/store/modules/storage"
 
 export type AnkiAction = string
 
@@ -16,14 +17,16 @@ export default {
 
         async deckNames({dispatch}: { dispatch: Dispatch }) {
             const response = await dispatch('invoke', {action: 'deckNames'})
-            console.log(response)
             return response.data.result
         },
 
         async noteTypes({dispatch}: { dispatch: Dispatch }) {
             const response = await dispatch('invoke', {action: 'modelNames'})
-            console.log(response)
             return response.data.result
+        },
+
+        async selectedNoteType() {
+            return storage.get('note_type') as string
         },
 
         invoke(_: any, {action, params = {}}: { action: AnkiAction, params: any }) {

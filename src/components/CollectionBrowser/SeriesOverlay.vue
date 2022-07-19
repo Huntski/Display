@@ -2,17 +2,18 @@
   <Popup>
     <div class="popup series mt-10 rounded-2xl z-50">
 
-      <div class="h-52 rounded-t-2xl relative text-white w-full bg-no-repeat bg-cover bg-center" v-bind:style="{ 'background-image': 'url(' + media.coverImage + ')' }">
+      <div class="h-52 rounded-t-2xl relative text-white w-full bg-no-repeat bg-cover bg-center"
+           v-bind:style="{ 'background-image': 'url(' + media.coverImage + ')' }">
         <div class="absolute rounded-t-2xl cover top-0 px-10 left-0 w-full h-full">
           <h1 class="pt-14 text-xl font-light">Series</h1>
           <h2 class="text-5xl font-jap">{{ media.title.native }}</h2>
         </div>
 
-        <Exit class="absolute top-3 right-3 cursor-pointer" @click="$emit('close')" />
+        <Exit class="absolute top-3 right-3 cursor-pointer" @click="$emit('close')"/>
       </div>
 
       <div class="grid grid-cols-3 gap-3 px-3 py-4">
-        <SeriesItem v-for="item in episodes" :key="item.id" :episode="item" />
+        <SeriesItem v-for="item in episodes" :key="item.id" :episode="item"/>
       </div>
 
     </div>
@@ -35,8 +36,13 @@ export default {
 
   computed: {
     episodes() {
+      console.log(this.media)
       return this.media.episodes
     }
+  },
+
+  created() {
+    console.log(this.episodes)
   },
 
   components: {Popup, Exit, SeriesItem}

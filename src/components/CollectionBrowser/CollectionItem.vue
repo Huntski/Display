@@ -1,9 +1,7 @@
 <template>
-  <div class="w-60 h-72 item ">
-    <div class="rounded-md transform overflow-hidden transition cursor-pointer flex items-center justify-center">
-      <img :src="media.coverImage" class="w-full transition" />
+    <div class="load-fade item w-60 h-80 rounded-md transform overflow-hidden bg-green transition cursor-pointer flex items-center justify-center">
+      <img :src="media.coverImage" class="object-contain w-full transition" />
     </div>
-  </div>
 </template>
 
 <script>

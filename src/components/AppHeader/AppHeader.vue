@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center pt-10">
+  <div class="flex sticky top-0 pb-5 bg-white items-center pt-10">
     <div>
       <h1>Good morning! 👋</h1>
       <p class="mb-0">Another great day to ‘study’.</p>
