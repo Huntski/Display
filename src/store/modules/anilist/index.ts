@@ -56,10 +56,8 @@ export default {
 
                 result = res.data.data.Media as AnlistMediaItem
             } catch (e) {
-                console.log(e)
-                return {
-                    id: 123123
-                }
+                console.log('Failed on search:', search, e)
+                return {}
             }
 
             return result

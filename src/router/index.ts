@@ -4,7 +4,7 @@ import Browser from '../views/Browser.vue'
 import Media from '../views/Media.vue'
 import Anki from '../views/Anki.vue'
 import Anilist from '../views/Anilist.vue'
-import Settings from '../views/Episode.vue'
+import Settings from '../views/Settings.vue'
 import Episode from '../views/Episode.vue'
 
 const routes: Array<RouteRecordRaw> = [

@@ -20,10 +20,6 @@
         <Anilist/>
       </router-link>
 
-      <router-link :to="{name: 'Settings'}">
-        <Settings/>
-      </router-link>
-
       <div class="notification">
         <Notification/>
       </div>
@@ -41,7 +37,7 @@
 </template>
 
 <script>
-import {Logo, Settings, Anilist, Anki, Collection, Notification} from '@/components/SideNav/Icons'
+import {Logo, Anilist, Anki, Collection, Notification} from '@/components/SideNav/Icons'
 
 export default {
   data() {
@@ -50,7 +46,7 @@ export default {
     }
   },
 
-  components: {Logo, Settings, Anilist, Anki, Collection, Notification}
+  components: {Logo, Anilist, Anki, Collection, Notification}
 }
 </script>
 

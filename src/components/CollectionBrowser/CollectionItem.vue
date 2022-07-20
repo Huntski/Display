@@ -1,6 +1,6 @@
 <template>
-    <div class="load-fade item w-60 h-80 rounded-md transform overflow-hidden bg-green transition cursor-pointer flex items-center justify-center">
-      <img :src="media.coverImage" class="object-contain w-full transition" />
+    <div class="load-fade item w-48 h-64 rounded-xl transform overflow-hidden bg-green transition cursor-pointer flex items-center justify-center">
+      <img :src="media.coverImage" class="object-cover h-full w-full transition" />
     </div>
 </template>
 

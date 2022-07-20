@@ -1,5 +1,7 @@
 <template>
   <div class="rounded-lg">
+    <Spinner class="w-10 m-auto mt-32" v-show="! collection.length" />
+
     <div class="media-collection grid gap-5 mt-10">
       <TransitionGroup name="fade">
         <CollectionItem
@@ -16,6 +18,7 @@
 <script>
 import CollectionItem from './CollectionItem'
 import SeriesOverlay from './SeriesOverlay'
+import {Spinner} from "@/components/Icons"
 
 export default {
   props: {
@@ -36,15 +39,11 @@ export default {
 
   watch: {
     collection(newVal) {
-      console.log(newVal)
+      console.log('New collection:', newVal)
     }
   },
 
-  created() {
-    console.log('Load media collection')
-  },
-
-  components: {CollectionItem, SeriesOverlay},
+  components: {CollectionItem, SeriesOverlay, Spinner},
 }
 </script>
 
@@ -53,19 +52,19 @@ export default {
   grid-template-columns: repeat(3, 1fr);
 }
 
-@media screen and (min-width: 1300px) {
+@media screen and (min-width: 1000px) {
   .media-collection {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media screen and (min-width: 1500px) {
+@media screen and (min-width: 1250px) {
   .media-collection {
     grid-template-columns: repeat(5, 1fr);
   }
 }
 
-@media screen and (min-width: 1750px) {
+@media screen and (min-width: 1650px) {
   .media-collection {
     grid-template-columns: repeat(6, 1fr);
   }

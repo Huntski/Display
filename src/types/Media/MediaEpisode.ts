@@ -3,7 +3,7 @@ import {Subtitle} from "@/types/Media/Subtitle"
 
 export interface MediaEpisode {
     id: number,
-    media_id?: number,
+    media_id: number,
     currentTime: number,
     fullPath: Path,
     fileName: Path,

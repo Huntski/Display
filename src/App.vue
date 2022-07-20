@@ -31,6 +31,8 @@ export default {
     if (! this.$route.params.length) {
       this.$router.push({ name: 'Welcome' })
     }
+
+
   },
 
   mounted() {

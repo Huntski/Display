@@ -1,9 +1,9 @@
 <template>
-  <div class="mb-5">
+  <div class="mb-3">
     <label class="text-lg">{{ label }}</label>
     <div class="relative select-container">
       <select
-          class="bg-transparent w-full text-lg px-5 py-4 relative bg-gray-100 italic text-sm font-raleway rounded border border-gray-300"
+          class="bg-transparent w-full px-5 py-4 relative bg-gray-100 italic text-sm font-raleway rounded border border-gray-300"
           @input="handleUpdate"
       >
         <option v-for="(item, index) in options" :key="index">{{ item }}</option>

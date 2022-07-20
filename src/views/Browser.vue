@@ -11,9 +11,16 @@ export default {
   data() {
     return {
       loaded: false,
-      collection: [],
       highlight: null,
       collectionPromise: null
+    }
+  },
+
+  computed: {
+    collection() {
+      console.log(this.$store.getters['media/getDisplayedMedia'])
+
+      return this.$store.getters['media/getDisplayedMedia']
     }
   },
 
@@ -22,16 +29,9 @@ export default {
       await this.$router.push({name: 'Welcome'})
     }
 
-    if (this.$store.getters['media/hasMediaCollection']) {
-      this.collection = await this.$store.dispatch('media/updateMediaCollection')
-    } else {
-      this.collection = this.$store.getters['media/getMediaCollection']
-    }
+    await this.$store.dispatch('media/loadMediaCollection')
 
-    this.highlight = this.collection[0]
     this.loaded = true
-
-
   },
 
   components: {CollectionBrowser}

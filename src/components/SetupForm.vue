@@ -1,16 +1,16 @@
 <template>
   <div>
     <Popup v-show="showComplete">
-      <div class="popup bg-regular-normal rounded-md py-10 px-3 shadow-lg mt-20 px-20 z-20 text-center">
-        <div class="flex justify-center items-center relative">
+      <div class="popup text-white bg-tabs-blue rounded-md py-10 px-3 shadow-lg mt-20 px-20 z-20 text-center">
+        <div class="flex justify-center items-center relative mb-10">
           <h1 class="font-bold text-2xl">Tip for the future!</h1>
           <Fire class="text-red-500 transform rotate-12 ml-2"/>
         </div>
 
-        <p class="mt-3">You can always change the directory location<br> within the settings tab.</p>
+        <p class="text-gray-300 text-lg">You can always change the directory location<br> within the settings tab.</p>
 
         <button class="bg-gray-800 text-white rounded px-8 py-5 mt-10" @click="completeSetup">
-          Understood!
+          Continue
         </button>
       </div>
     </Popup>

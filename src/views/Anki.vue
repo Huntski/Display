@@ -1,25 +1,39 @@
 <template>
   <div class="p-10 border border-gray-200 rounded-md w-full">
-    <h2>Anki card setup</h2>
+    <h2 class="mb-8">Anki card setup</h2>
 
-    <CheckList :options="usage" v-model:value="form.whichNoteType" />
+    <CheckList class="mb-8" :options="usage" v-model:value="whichNoteType" />
 
-    <div class="w-1/2" :class="{'opacity-50 pointer-events-none' : form.whichNoteType === 'defaultNoteType'}">
-      <div class="flex gap-3">
-        <Select
-            :options="options.deckNames"
-            v-model:value="form.deck"
-            label="Deck"
-        />
-
-        <Select
-            :options="options.noteTypes"
-            v-model:value="form.note_type"
-            label="Notetype"
-        />
+    <div class="w-full lg:w-2/3" :class="{'opacity-50 pointer-events-none' : whichNoteType === 'defaultNoteType'}">
+      <div class="grid gap-3 grid-cols-2">
+        <div>
+          <h3 class="text-lg font-semibold">Deck</h3>
+          <Select
+              :options="options.deckNames"
+              v-model:value="deck"
+          />
+        </div>
 
         <div>
+          <h3 class="text-lg font-semibold">Notetype</h3>
+          <Select
+              :options="options.noteTypes"
+              v-model:value="note_type"
+              @change="loadFields"
+          />
+        </div>
 
+        <div class="col-start-1 col-end-3 mt-5">
+          <h3 class="text-lg font-semibold">Fields</h3>
+
+          <div v-for="(value, key) in fields" :key="key" class="flex items-center">
+            <span class="mr-auto">{{key}}</span>
+            <Select
+                class="w-2/3"
+                :options="options.fieldOptions"
+                v-model:value="fields[key]"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -36,7 +50,7 @@ export default {
         deckNames: [],
         noteTypes: [],
         fieldOptions: [
-          'Nothing',
+          '',
           'Expression',
           'Sentence',
           'Meaning',
@@ -58,17 +72,16 @@ export default {
         }
       },
 
-      form: {
-        whichNoteType: 'defaultNoteType',
-        deck: '',
-        note_type: ''
-      }
+      fields: [],
+
+      whichNoteType: 'defaultNoteType',
+      deck: '',
+      note_type: ''
     }
   },
 
   methods: {
     changeNoteTypeOption() {
-      console.log(this.usage)
       if (this.usage.defaultNoteType === true) {
         this.usage.defaultNoteType = false
       } else {
@@ -77,13 +90,20 @@ export default {
     },
 
     loadFields() {
+      this.fields = {}
+
+      this.$store.dispatch('anki/notetype/updateNoteTypeInUse', this.note_type)
+
       this.$store.dispatch('anki/notetype/getNoteTypeFields').then(noteTypeFields => {
         console.log('NoteTypes:', noteTypeFields)
 
-        noteTypeFields.forEach(field => {
-          this.fields[field] = ''
-          console.log(this.fields)
-        })
+        const fields = {}
+
+        for (const field in noteTypeFields) {
+          fields[noteTypeFields[field]] = ''
+        }
+
+        this.fields = fields
       })
     }
   },
@@ -91,7 +111,7 @@ export default {
   async mounted() {
     this.options.deckNames = await this.$store.dispatch('anki/deckNames')
     this.options.noteTypes = await this.$store.dispatch('anki/noteTypes')
-    this.form.note_type = await this.$store.dispatch('anki/selectedNoteType')
+    this.note_type = await this.$store.dispatch('anki/selectedNoteType')
   },
 
   components: {Select, CheckList}

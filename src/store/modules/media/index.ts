@@ -10,16 +10,13 @@ export default {
     namespaced: true,
 
     state: {
-        media: Array<MediaItem>()
+        media: Array<MediaItem>(),
+        displayedMedia: Array<MediaItem>()
     } as State,
 
     getters: {
-        getMediaFromStore(state: State): MediaItem[] {
-            return state.media
-        },
-
-        hasMediaCollection(): boolean {
-            return storage.has('media')
+        getDisplayedMedia(state: State): MediaItem[] {
+            return state.displayedMedia
         },
 
         getCurrentMedia(): MediaItem {
@@ -34,11 +31,31 @@ export default {
     mutations: {
         SET_MEDIA(state: State, payload: MediaItem[]): void {
             state.media = payload
+            setTimeout(_ => {
+                state.displayedMedia = payload
+            }, 1000)
+        },
+
+        SET_DISPLAYED_MEDIA(state: State, payload: MediaItem[]): void {
+            state.displayedMedia = payload
         }
+
+
     },
 
     actions: {
+        async loadMediaCollection({ commit, dispatch }: { commit: Commit, dispatch: Dispatch })  {
+            if (!storage.has('media')) {
+                await dispatch('updateMediaCollection')
+            } else {
+                console.log('other stuf')
+                await commit('SET_MEDIA', storage.get('media') as MediaItem[])
+            }
+        },
+
         async updateMediaCollection({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }): Promise<MediaItem[]> {
+            await commit('SET_DISPLAYED_MEDIA', [])
+
             try {
                 const mediaCollection = await dispatch('scanMediaInMainDirectory')
 
@@ -54,8 +71,6 @@ export default {
             } catch (e) {
                 console.log(e)
             }
-
-            console.log('Loading old store.')
 
             return storage.get('media') as MediaItem[]
         },
@@ -86,7 +101,6 @@ export default {
                     let order = 1;
 
                     episodeFiles.forEach(episodeFile => {
-                        console.log('Episode:', episodeFile)
                         if (episodeFile.name.includes('mp4') || episodeFile.name.includes('mov')) {
                             dispatch('episode/storeEpisode', {
                                 id: order,
@@ -121,18 +135,20 @@ export default {
         },
 
 
-        searchMediaTitle({ state }: { state: State }, query: string): MediaItem[] {
+        searchMediaTitle({ commit, state }: { commit: Commit, state: State }, query: string): void {
+            let result;
+
             if (query === '') {
-                return state.media
+                result = state.media
             }
 
-            return state.media.filter((item: MediaItem) => {
-                if (item.title.romaji.toLowerCase().includes(query.toLowerCase())) {
-                    return true
-                }
+            result = state.media.filter((item: MediaItem) =>
+                item.title.romaji.toLowerCase().includes(query.toLowerCase()) || item.id == parseInt(query)
+            )
 
-                return item.id == parseInt(query)
-            })
+            console.log(result)
+
+            commit('SET_DISPLAYED_MEDIA', result)
         },
 
         // getMediaItem({ state }: { state: any }, id: number): MediaItem {

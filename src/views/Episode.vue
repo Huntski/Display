@@ -1,43 +1,43 @@
 <template>
-    <div class="w-full min-h-screen bg-black relative">
-      <router-link to="/" class="absolute z-50 top-5 left-5 cursor-pointer">
-        <Return class="w-7" />
-      </router-link>
+  <div class="w-full min-h-screen bg-black relative">
+    <router-link to="/" class="absolute z-50 top-5 left-5 cursor-pointer">
+      <Return class="w-7"/>
+    </router-link>
 
-      <video @timeupdate="processBar" ref="video" class="w-full" autoplay @click="togglePlay" muted>
-        <track ref="subs" src="" kind="subtitles" srclang="en" label="English">
-      </video>
+    <video @timeupdate="processBar" ref="video" class="w-full" autoplay @click="togglePlay" muted>
+      <track ref="subs" src="" kind="subtitles" srclang="en" label="English">
+    </video>
 
-      <div class="w-full text-white absolute bottom-0 flex flex-col items-center h-40">
-        <div class="w-3/4 flex flex-col items-center h-40">
-          <span class="ml-auto italic">{{ timeLeft }}</span>
+    <div class="w-full text-white absolute bottom-0 flex flex-col items-center h-40">
+      <div class="w-3/4 flex flex-col items-center h-40">
+        <span class="ml-auto italic">{{ timeLeft }}</span>
 
-          <div class="w-full h-2 bg-white rounded-full overflow-hidden">
-            <div ref="indicator" class="bg-red-500 w-0 h-full relative" />
-          </div>
+        <div class="w-full h-2 bg-white rounded-full overflow-hidden">
+          <div ref="indicator" class="bg-red-500 w-0 h-full relative"/>
+        </div>
 
-          <div class="w-full flex items-center justify-between mt-5 text-white">
-            <div class="flex w-60">
-              <div class="text-white w-6" @click="toggleMute">
-                <Mute v-if="volume < 0.1 || muted " />
-                <Sound v-else />
-              </div>
-
-              <input @input="changeVolume" v-model="volume" type="range" step=".1" min="0" max="1">
+        <div class="w-full flex items-center justify-between mt-5 text-white">
+          <div class="flex w-60">
+            <div class="text-white w-6" @click="toggleMute">
+              <Mute v-if="volume < 0.1 || muted "/>
+              <Sound v-else/>
             </div>
 
-            <div class="w-60">
-              <div class="w-8 m-auto cursor-pointer" @click="togglePlay">
-                <Play class="w-7" v-if="!paused" />
-                <Pause class="w-6" v-if="paused" />
-              </div>
-            </div>
-
-            <div class="w-60"></div>
+            <input @input="changeVolume" v-model="volume" type="range" step=".1" min="0" max="1">
           </div>
+
+          <div class="w-60">
+            <div class="w-8 m-auto cursor-pointer" @click="togglePlay">
+              <Play class="w-7" v-if="!paused"/>
+              <Pause class="w-6" v-if="paused"/>
+            </div>
+          </div>
+
+          <div class="w-60"></div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -103,13 +103,17 @@ export default {
   },
 
   beforeMount() {
-    this.media = this.$store.getters['media/getMediaFromStore'].filter(item => this.$route.params.media_id == item.id).pop()
-    this.episode = this.media.episodes[0]
+    this.episode = this.$store.getters['episode/episodes'].filter(item =>
+        this.$route.params.media_id == item.media_id &&
+        this.$route.params.episode_id == item.id
+    ).pop()
+
+    console.log(this.episode)
   },
 
   mounted() {
     try {
-      const videoFile = fs.readFileSync(this.media.episodes[0].fullPath)
+      const videoFile = fs.readFileSync(this.episode.fullPath)
       this.fileURL = URL.createObjectURL(new Blob([videoFile]))
       this.$refs.video.src = this.fileURL
 
@@ -128,6 +132,7 @@ export default {
 input[type="range"]::-moz-range-progress {
   background: #3071A9;
 }
+
 input[type="range"]::-moz-range-track {
   background: #3071A9;
 }

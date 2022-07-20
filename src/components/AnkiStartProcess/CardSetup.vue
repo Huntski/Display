@@ -51,7 +51,7 @@ export default {
 
       noteTypeFields.forEach(field => {
         this.fields[field] = ''
-        console.log(this.fields)
+        console.log('Fields:', this.fields)
       })
     })
   },

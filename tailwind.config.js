@@ -8,9 +8,10 @@ module.exports = {
       colors: {
         'regular-normal': '#323648',
         'regular-lighter': '#464b67',
-        'tabs-blue': '#fff',
+        'tabs-blue': '#141414',
         'primary-gold': '#B19017',
-        'primary-gold-bright': '#d3ab16'
+        'primary-gold-bright': '#d3ab16',
+        'transparent': '#ffffff00',
       },
       boxShadow: {
         '3xl': '0 0 60px -15px rgba(0, 0, 0, 0.3)',
@@ -25,4 +26,12 @@ module.exports = {
     },
   },
   plugins: [],
+  variants: {
+    extend: {
+      backgroundColor: ['active'],
+      borderColor: ['active'],
+      borderWidth: ['active'],
+      rotate: ['group-hover']
+    }
+  },
 }

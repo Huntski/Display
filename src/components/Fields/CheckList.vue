@@ -1,6 +1,6 @@
 <template>
-  <form ref="checklist">
-    <div class="my-5" v-for="(option, index) in options" :key="index" >
+  <div ref="checklist" class="flex flex-col gap-3">
+    <div v-for="(option, index) in options" :key="index" >
       <input type="radio" :name="radioId" ref="checkbox" :id="index" class="hidden" :checked="option.checked" @change="handleInput"/>
       <label :for="index" class="cursor-pointer flex items-center">
         <div class="w-6 h-6 border border-gray-300 rounded-full"/>
@@ -8,7 +8,7 @@
         <span class="text-lg ml-5">{{ option.label }}</span>
       </label>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>

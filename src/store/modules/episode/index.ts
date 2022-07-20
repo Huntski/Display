@@ -1,5 +1,6 @@
 import {MediaEpisode} from "@/types/Media"
 import storage from "@/store/modules/storage"
+import Media from "@/store/modules/media";
 
 export default {
     namespaced: true,
@@ -12,21 +13,54 @@ export default {
 
     actions: {
         storeEpisode(_: any, payload: MediaEpisode): void {
-            let episodes: Array<MediaEpisode> = []
+            const episodes = storage.get('episodes') as Array<MediaEpisode>
 
-            if (storage.has('episodes')) {
-                episodes = storage.get('episodes') as Array<MediaEpisode>
+            const existingFile = episodes.filter(item =>
+                item.media_id === payload.media_id && item.id === payload.id
+            )
+
+            let episodeExists = false
+
+            for (let i = 0; i < episodes.length; i++) {
+                if (episodes[i].media_id === payload.media_id && episodes[i].id === payload.id) {
+                    episodes[i].directory = payload.directory
+                    episodes[i].fileName = payload.fileName
+                    episodes[i].fullPath = payload.fullPath
+
+                    episodeExists = true
+                    break
+                }
             }
 
-            episodes.push(payload)
+            if (!episodeExists) {
+                episodes.push(payload)
+            }
 
             storage.set('episodes', episodes)
+        },
+
+        episodeExists(_: any, {media_id, order}: { media_id: number, order: number }) {
+            const episodes = storage.get('episodes') as Array<MediaEpisode>
+        },
+
+        getMediaEpisodesById(_: any, id: number): MediaEpisode[] {
+            const episodes = storage.get('episodes') as Array<MediaEpisode>
+
+            const result = episodes.filter(item => item.media_id === id)
+
+            console.log(result)
+
+            return result
         },
 
         searchEpisodeById(_: any, id: number): MediaEpisode {
             const episodes = storage.get('episodes') as Array<MediaEpisode>
 
+            console.log('episodes:', episodes)
+
             const result = episodes.filter(item => item.id === id)[0]
+
+            console.log(result)
 
             return result
         }

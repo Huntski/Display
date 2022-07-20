@@ -1,5 +1,5 @@
 <template>
-  <div class="relative group cursor-pointer font-bold italic text-sm font-raleway rounded flex items-center justify-center">
+  <div class="relative group cursor-pointer font-bold italic text-lg font-raleway rounded flex items-center justify-center">
     <input :value="value"
            class="bg-transparent pl-5 pr-14 w-75 py-3 border-2 border-gray-200"
            ref="input"
