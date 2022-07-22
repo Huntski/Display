@@ -48,7 +48,7 @@ export default {
         }
       })
 
-      setTimeout(_ => {requestAnimationFrame(move)}, 10)
+      setTimeout(() => {requestAnimationFrame(move)}, 10)
     }
 
     setTimeout(() => {

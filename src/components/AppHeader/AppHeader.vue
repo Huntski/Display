@@ -52,7 +52,7 @@ export default {
       const curHour = new Date().getHours()
 
       if (curHour < 4) {
-        return "\"Man is a genius when he is dreaming.\" 💤"
+        return "\"Man is a genius when he is dreaming.\""
       } else if (curHour < 12) {
         return "Another great day to ‘study’.️"
       } else if (curHour < 18) {

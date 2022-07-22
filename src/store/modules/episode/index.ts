@@ -48,8 +48,6 @@ export default {
 
             const result = episodes.filter(item => item.media_id === id)
 
-            console.log(result)
-
             return result
         },
 

@@ -46,7 +46,7 @@ export default {
   },
 
   created() {
-    if (this.$store.getters['media/getDirectoryFromStore']) {
+    if (!this.$store.getters['media/getDirectoryFromStore']) {
       this.$router.push({name: 'Browser'})
     }
   },

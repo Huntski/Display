@@ -107,8 +107,6 @@ export default {
         this.$route.params.media_id == item.media_id &&
         this.$route.params.episode_id == item.id
     ).pop()
-
-    console.log(this.episode)
   },
 
   mounted() {

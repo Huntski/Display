@@ -9,12 +9,15 @@
         <router-view />
       </div>
     </main>
+
+    <SideAlerts />
   </div>
 </template>
 
 <script>
 import {SideNav} from "@/components/SideNav"
 import {AppHeader} from '@/components/AppHeader'
+import SideAlerts from "@/components/SideAlerts"
 
 export default {
   computed: {
@@ -31,14 +34,12 @@ export default {
     if (! this.$route.params.length) {
       this.$router.push({ name: 'Welcome' })
     }
-
-
   },
 
   mounted() {
     console.log(this.$route.path.includes)
   },
 
-  components: {SideNav, AppHeader}
+  components: {SideNav, AppHeader, SideAlerts}
 }
 </script>

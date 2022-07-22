@@ -31,7 +31,7 @@ export default {
     mutations: {
         SET_MEDIA(state: State, payload: MediaItem[]): void {
             state.media = payload
-            setTimeout(_ => {
+            setTimeout(() => {
                 state.displayedMedia = payload
             }, 1000)
         },
@@ -39,8 +39,6 @@ export default {
         SET_DISPLAYED_MEDIA(state: State, payload: MediaItem[]): void {
             state.displayedMedia = payload
         }
-
-
     },
 
     actions: {
@@ -48,7 +46,6 @@ export default {
             if (!storage.has('media')) {
                 await dispatch('updateMediaCollection')
             } else {
-                console.log('other stuf')
                 await commit('SET_MEDIA', storage.get('media') as MediaItem[])
             }
         },
@@ -62,8 +59,6 @@ export default {
                 await new Promise(resolve => setTimeout(resolve, 1000))
 
                 console.log(mediaCollection)
-
-                storage.set('media', mediaCollection)
 
                 await commit('SET_MEDIA', mediaCollection)
 
@@ -145,8 +140,6 @@ export default {
             result = state.media.filter((item: MediaItem) =>
                 item.title.romaji.toLowerCase().includes(query.toLowerCase()) || item.id == parseInt(query)
             )
-
-            console.log(result)
 
             commit('SET_DISPLAYED_MEDIA', result)
         },

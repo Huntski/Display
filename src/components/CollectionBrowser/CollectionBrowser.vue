@@ -1,8 +1,8 @@
 <template>
   <div class="rounded-lg">
-    <Spinner class="w-10 m-auto mt-32" v-show="! collection.length" />
+    <Spinner class="w-10 m-auto mt-32" v-if="! collection.length" />
 
-    <div class="media-collection grid gap-5 mt-10">
+    <div class="media-collection grid gap-5 mt-10" v-else>
       <TransitionGroup name="fade">
         <CollectionItem
             v-for="(item, index) in collection" :key="index" :media="item"

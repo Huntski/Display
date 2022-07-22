@@ -3,6 +3,7 @@ import anilist from '@/store/modules/anilist'
 import media from '@/store/modules/media'
 import anki from '@/store/modules/anki'
 import episode from '@/store/modules/episode'
+import alerts from '@/store/modules/alerts'
 
 export default new Vuex.Store({
     state: {
@@ -39,5 +40,6 @@ export default new Vuex.Store({
         media,
         anki,
         episode,
+        alerts,
     }
 })
