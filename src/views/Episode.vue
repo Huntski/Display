@@ -104,8 +104,8 @@ export default {
 
   beforeMount() {
     this.episode = this.$store.getters['episode/episodes'].filter(item =>
-        this.$route.params.media_id == item.media_id &&
-        this.$route.params.episode_id == item.id
+        this.$route.params.media_id === item.media_id &&
+        this.$route.params.episode_id === item.id
     ).pop()
   },
 

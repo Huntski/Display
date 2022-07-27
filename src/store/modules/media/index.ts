@@ -58,8 +58,6 @@ export default {
 
                 await new Promise(resolve => setTimeout(resolve, 1000))
 
-                console.log(mediaCollection)
-
                 await commit('SET_MEDIA', mediaCollection)
 
                 return mediaCollection

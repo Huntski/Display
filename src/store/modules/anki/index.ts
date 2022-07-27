@@ -15,6 +15,20 @@ export default {
             return response.data.result.permission
         },
 
+        async connected({dispatch}: { dispatch: Dispatch }) {
+            try {
+                const response = await dispatch('invoke', {action: 'requestPermission'})
+
+                if (response.data.result.permission === 'granted') {
+                    return true
+                }
+            } catch (e) {
+                console.log(e)
+            }
+
+            return false
+        },
+
         async deckNames({dispatch}: { dispatch: Dispatch }) {
             const response = await dispatch('invoke', {action: 'deckNames'})
             return response.data.result
