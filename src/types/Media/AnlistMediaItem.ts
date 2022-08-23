@@ -6,4 +6,5 @@ export interface AnlistMediaItem {
     title: MediaTitle
     episodes: number,
     description: string,
+    format: string
 }

@@ -1,7 +1,7 @@
 <template>
-  <div class="alert load-fade flex items-center shadow-lg rounded-lg bg-green-300 hover:bg-green-400 px-5 py-5">
+  <div class="alert load-fade flex items-center shadow-lg rounded-lg px-5 py-5" :class="{'bg-green-300 hover:bg-green-400': !alert.error, 'bg-red-300 hover:bg-red-400': alert.error}">
     <div class="mr-10">
-      <h2 class="text-lg">Success</h2>
+      <h2 class="text-lg">{{ alertTitle }}</h2>
       <span>{{ alert.message }}</span>
     </div>
 
@@ -20,6 +20,16 @@ export default {
       type: Object,
       required: true
     },
+  },
+
+  computed: {
+    alertTitle() {
+      if (this.alert.error) {
+        return 'Failed'
+      }
+
+      return 'Success'
+    }
   },
 
   data() {
@@ -41,7 +51,7 @@ export default {
 
     this.interval = setTimeout(_ => {
       this.$store.dispatch('alerts/removeAlert', alertId)
-    }, 3000)
+    }, 5000)
   },
 
   components: {Cross},
@@ -50,6 +60,6 @@ export default {
 
 <style>
 .alert {
-  width: 500px;
+  min-width: 500px;
 }
 </style>

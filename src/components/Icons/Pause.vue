@@ -1,10 +1,9 @@
 <template>
-  <svg viewBox="0 0 21 26" class="fill-current">
-      <g transform="translate(-732.000000, -735.000000)">
-        <g transform="translate(732.000000, 735.000000)">
-          <rect id="Rectangle" x="0" y="0" width="7" height="26" rx="1"></rect>
-          <rect id="Rectangle-Copy-2" x="14" y="0" width="7" height="26" rx="1"></rect>
-        </g>
+  <svg viewBox="0 0 26 28" class="fill-current">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Artboard-Copy-10" transform="translate(-688.000000, -734.000000)" fill="#FFFFFF">
+        <path d="M703.76296,737.290859 L715.42262,759.055557 C715.944221,760.029213 715.577759,761.241359 714.604103,761.76296 C714.313624,761.918573 713.989195,762 713.65966,762 L690.34034,762 C689.235771,762 688.34034,761.104569 688.34034,760 C688.34034,759.670465 688.421767,759.346036 688.57738,759.055557 L700.23704,737.290859 C700.758641,736.317203 701.970787,735.95074 702.944443,736.472341 C703.292,736.658533 703.576769,736.943301 703.76296,737.290859 Z" id="Triangle" transform="translate(702.000000, 748.000000) rotate(-270.000000) translate(-702.000000, -748.000000) "></path>
       </g>
+    </g>
   </svg>
 </template>

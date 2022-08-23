@@ -29,7 +29,7 @@ import Avatar from "./Avatar"
 export default {
   methods: {
     reloadCollection() {
-      this.$store.dispatch('media/updateMediaCollection')
+      this.$store.dispatch('media/reloadMediaCollection')
     }
   },
 

@@ -1,7 +1,7 @@
 <template>
   <div>
-<!--    <AnkiCardSetup v-if="ankiIsConnected" />-->
-    <AnkiConnect />
+    <AnkiCardSetup v-if="connected" />
+    <AnkiConnect v-else />
   </div>
 </template>
 
@@ -10,6 +10,16 @@ import AnkiCardSetup from "@/components/AnkiCardSetup"
 import AnkiConnect from "@/components/AnkiConnect"
 
 export default {
-  components: {AnkiConnect}
+  computed: {
+    connected() {
+      return this.$store.getters['anki/connected']
+    }
+  },
+
+  created() {
+    this.$store.dispatch('anki/checkPermission')
+  },
+
+  components: {AnkiConnect, AnkiCardSetup}
 }
 </script>

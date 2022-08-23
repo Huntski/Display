@@ -12,6 +12,7 @@ module.exports = {
         'primary-gold': '#B19017',
         'primary-gold-bright': '#d3ab16',
         'transparent': '#ffffff00',
+        'controls': '#000'
       },
       boxShadow: {
         '3xl': '0 0 60px -15px rgba(0, 0, 0, 0.3)',
@@ -31,7 +32,8 @@ module.exports = {
       backgroundColor: ['active'],
       borderColor: ['active'],
       borderWidth: ['active'],
-      rotate: ['group-hover']
+      rotate: ['group-hover'],
+      scale: ['group-hover'],
     }
   },
 }

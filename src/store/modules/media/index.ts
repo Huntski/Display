@@ -5,6 +5,7 @@ import {Commit, Dispatch} from "vuex"
 import {MediaItem, AnlistMediaItem, MediaEpisode} from "@/types/Media"
 import {Path} from "@/types"
 import {StateMedia as State} from "./types/StateMedia"
+import ScannedMediaReponse from './types/ScannedMediaReponse'
 
 export default {
     namespaced: true,
@@ -42,7 +43,7 @@ export default {
     },
 
     actions: {
-        async loadMediaCollection({ commit, dispatch }: { commit: Commit, dispatch: Dispatch })  {
+        async loadMediaCollection({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }): Promise<void>  {
             if (!storage.has('media')) {
                 await dispatch('updateMediaCollection')
             } else {
@@ -54,13 +55,13 @@ export default {
             await commit('SET_DISPLAYED_MEDIA', [])
 
             try {
-                const mediaCollection = await dispatch('scanMediaInMainDirectory')
+                const response = await dispatch('scanMediaInMainDirectory')
 
                 await new Promise(resolve => setTimeout(resolve, 1000))
 
-                await commit('SET_MEDIA', mediaCollection)
+                await commit('SET_MEDIA', response.result)
 
-                return mediaCollection
+                return response
             } catch (e) {
                 console.log(e)
             }
@@ -68,7 +69,7 @@ export default {
             return storage.get('media') as MediaItem[]
         },
 
-        async scanMediaInMainDirectory({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }): Promise<MediaItem[]> {
+        async scanMediaInMainDirectory({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }): Promise<ScannedMediaReponse> {
 
             const directory = storage.get('directory') as Path
 
@@ -78,11 +79,14 @@ export default {
                 .map((dirent) => dirent.name)
 
             const result = Array<MediaItem>()
+            let failedAmount = 0
 
             for (const title of directories) {
                 console.log('Media:', title)
 
                 const searchResult = await dispatch('anilist/searchItem', title, {root:true})
+
+                console.log('search Result:', searchResult, typeof searchResult)
 
                 dispatch('anilist/searchItem', title, {root:true}).then((media: AnlistMediaItem) => {
                     const episodeFiles = fs.readdirSync(`${directory}/${title}`, {withFileTypes: true})
@@ -107,16 +111,35 @@ export default {
                         }
                     })
 
-                    result.push({
-                        id: media.id,
-                        name: title,
-                        coverImage: media.coverImage.large || '',
-                        color: media.coverImage.color|| '',
-                        title: media.title || title,
-                        amount: media.episodes || order,
-                        description: media.description || '',
-                        currentEpisode: 1,
-                    })
+                    if (! Object.keys(searchResult).length) {
+                        failedAmount++
+
+                        result.push({
+                            id: media.id,
+                            name: title,
+                            coverImage: '',
+                            color: '',
+                            title: {
+                                romaji: title,
+                                english: title,
+                                native: title,
+                            },
+                            amount: order,
+                            description: media.description ?? '',
+                            currentEpisode: 1,
+                        })
+                    } else {
+                        result.push({
+                            id: media.id,
+                            name: title,
+                            coverImage: media.coverImage.large ?? '',
+                            color: media.coverImage.color ?? '',
+                            title: media.title,
+                            amount: media.episodes ?? order,
+                            description: media.description ?? '',
+                            currentEpisode: 1,
+                        })
+                    }
                 })
             }
 
@@ -124,9 +147,30 @@ export default {
 
             await commit('SET_MEDIA', result)
 
-            return result
+            console.log('FAILED AMOUNT:', failedAmount)
+
+            return {
+                result: result,
+                failed: failedAmount
+            }
         },
 
+        async reloadMediaCollection({ dispatch }: { dispatch: Dispatch }): Promise<void> {
+            const response = await dispatch('updateMediaCollection')
+
+            dispatch('alerts/notify', {
+                id: 1,
+                message: `Successfully updated media collection.`
+            }, {root: true})
+
+            if (response.failed) {
+                dispatch('alerts/error', {
+                    id: 2,
+                    message: `${response.failed} items weren't recognised.`,
+                    error: true
+                }, {root: true})
+            }
+        },
 
         searchMediaTitle({ commit, state }: { commit: Commit, state: State }, query: string): void {
             let result;

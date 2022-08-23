@@ -1,6 +1,6 @@
 <template>
   <div class="mt-10">
-    <h2>Get started with Anki</h2>
+    <h2 class="mb-5">Get started with Anki</h2>
 
     <p>By settings up Anki, you will be able to make new flash cards from the words and sentences you want to learn,
       while watching any show, movie or anime with subtitles.</p>
@@ -9,7 +9,7 @@
       <div class="w-7 h-7">
         <Check class="text-green-500" v-if="status === 'granted'"/>
         <Warning v-else-if="status === 'failed'"/>
-        <Spinner v-else/>
+        <Spinner v-else />
       </div>
 
       <span class="italic mx-10">{{ message[this.status] }}</span>
@@ -55,9 +55,13 @@ export default {
 
   methods: {
     async check() {
+      this.status = 'loading'
+
       const permission = await this.$store.dispatch('anki/checkPermission')
 
-      setTimeout(async () => this.$emit('update:status', permission), 1000)
+      console.log(permission)
+
+      setTimeout(() => this.status = permission, 1000)
     },
 
     openExtensionLink() {

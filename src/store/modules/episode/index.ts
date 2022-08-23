@@ -7,6 +7,8 @@ export default {
 
     getters: {
         episodes() {
+            // console.log(storage.get('episodes'))
+
             return storage.get('episodes') as Array<MediaEpisode>
         }
     },

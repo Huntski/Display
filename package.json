@@ -1,5 +1,5 @@
 {
-  "name": "Display",
+  "name": "display",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -27,10 +27,11 @@
     "sharp": "0",
     "shell": "^0.9.4",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "tiny-segmenter": "^0.2.0",
     "uuid": "^8.3.2",
     "vue": "^3.0.0",
     "vue-chart-3": "^3.1.8",
-    "vue-router": "^4.0.12",
+    "vue-router": "^4.0.13",
     "vuedraggable": "^4.1.0",
     "vuex": "^4.0.2"
   },

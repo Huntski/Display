@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-lg">
+  <div class="rounded-lg pb-10">
     <Spinner class="w-10 m-auto mt-32" v-if="! collection.length" />
 
     <div class="media-collection grid gap-5 mt-10" v-else>
@@ -64,13 +64,13 @@ export default {
   }
 }
 
-@media screen and (min-width: 1650px) {
+@media screen and (min-width: 1500px) {
   .media-collection {
     grid-template-columns: repeat(6, 1fr);
   }
 }
 
-@media screen and (min-width: 2050px) {
+@media screen and (min-width: 1750px) {
   .media-collection {
     grid-template-columns: repeat(7, 1fr);
   }

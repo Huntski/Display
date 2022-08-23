@@ -1,32 +1,43 @@
 import axios from 'axios'
-import {Dispatch} from "vuex"
+import {Commit, Dispatch} from "vuex"
 import deck from './deck'
 import notetype from './notetype'
 import storage from "@/store/modules/storage"
+import {Permission} from './types/Permission'
+
+import {StateAnki as State} from "@/store/modules/anki/types/StateAnki"
 
 export type AnkiAction = string
 
 export default {
     namespaced: true,
 
-    actions: {
-        async checkPermission({dispatch}: { dispatch: Dispatch }) {
-            const response = await dispatch('invoke', {action: 'requestPermission'})
-            return response.data.result.permission
-        },
+    status: {
+        connected: false,
+    } as State,
 
-        async connected({dispatch}: { dispatch: Dispatch }) {
+    getters: {
+        connected(state: State) {
+            return state.connected
+        }
+    },
+
+    mutations: {
+        SET_CONNECTED(state: State, payload: boolean): void {
+            state.connected = payload
+        }
+    },
+
+    actions: {
+        async checkPermission({commit, dispatch}: { commit: Commit, dispatch: Dispatch }) {
             try {
                 const response = await dispatch('invoke', {action: 'requestPermission'})
-
-                if (response.data.result.permission === 'granted') {
-                    return true
-                }
+                commit('SET_CONNECTED', true)
+                return response.data.result.permission as Permission
             } catch (e) {
-                console.log(e)
+                commit('SET_CONNECTED', false)
+                return 'failed'
             }
-
-            return false
         },
 
         async deckNames({dispatch}: { dispatch: Dispatch }) {

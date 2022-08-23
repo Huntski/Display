@@ -32,6 +32,11 @@ export default {
             commit('ADD_ALERT', alert)
         },
 
+        error({commit}: { commit: Commit }, alert: Alert) {
+            alert.error = true
+            commit('ADD_ALERT', alert)
+        },
+
         removeAlert({commit}: { commit: Commit }, alertId: number) {
             commit('REMOVE_ALERT', alertId)
         },
