@@ -8819,6 +8819,11 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
+subtitles-parser-vtt@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/subtitles-parser-vtt/-/subtitles-parser-vtt-0.1.0.tgz#63283da9838d956d8e3c497962eb0041742a5146"
+  integrity sha512-+y3GOvLL+71JLMFFjqSi4p0J9ddSbhpXKaWG6vHUT8PqPZmlhyAsfu0LP248FdVGfwNIj77wIgVkfQ2xwCZ4+Q==
+
 sumchecker@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/sumchecker/-/sumchecker-3.0.1.tgz#6377e996795abb0b6d348e9b3e1dfb24345a8e42"

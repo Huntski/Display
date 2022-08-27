@@ -54,6 +54,7 @@ import fs from 'fs'
 import {Mute, Pause, Play, Return, Sound, Fullscreen} from '@/components/Icons'
 import SideTracks from "./SideTracks"
 import ProcessBar from './ProcessBar'
+import parser from 'subtitles-parser-vtt'
 
 export default {
   data() {
@@ -163,8 +164,10 @@ export default {
         this.fileURL = URL.createObjectURL(new Blob([videoFile]))
         this.$refs.video.src = this.fileURL
 
-        const subtitleFile = fs.readFileSync('/Users/wieb/Documents/Films/憑物語/Tsukimonogatari - 01 (BD 1280x720 AVC AACx2).vtt')
-        this.$refs.subs.src = URL.createObjectURL(new Blob([subtitleFile]))
+        const subtitleFile = fs.readFileSync('/Users/wieb/Documents/Films/憑物語/Tsukimonogatari - 01 (BD 1280x720 AVC AACx2).srt', 'utf8')
+        const vttFile = parser.fromVtt(subtitleFile)
+        console.log(vttFile)
+        this.$refs.subs.src = URL.createObjectURL(new Blob([]))
       } catch (e) {
         console.log(e)
       }

@@ -10,7 +10,7 @@
       />
     </div>
 
-    <div v-if="loadingSubs && tracks.length < 0" class="my-auto w-full h-full flex flex-col justify-center items-center mx-auto">
+    <div v-if="tracks.length < 0" class="my-auto w-full h-full flex flex-col justify-center items-center mx-auto">
       <Spinner class="w-10 mb-5 text-blue-500" />
       <span class="text-white">Loading subtitles...</span>
     </div>

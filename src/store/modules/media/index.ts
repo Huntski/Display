@@ -5,7 +5,7 @@ import {Commit, Dispatch} from "vuex"
 import {MediaItem, AnlistMediaItem, MediaEpisode} from "@/types/Media"
 import {Path} from "@/types"
 import {StateMedia as State} from "./types/StateMedia"
-import ScannedMediaReponse from './types/ScannedMediaReponse'
+import ScannedMediaResponse from './types/ScannedMediaResponse'
 
 export default {
     namespaced: true,
@@ -69,7 +69,7 @@ export default {
             return storage.get('media') as MediaItem[]
         },
 
-        async scanMediaInMainDirectory({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }): Promise<ScannedMediaReponse> {
+        async scanMediaInMainDirectory({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }): Promise<ScannedMediaResponse> {
 
             const directory = storage.get('directory') as Path
 
@@ -105,6 +105,7 @@ export default {
                                 fullPath: `${directory}/${title}/${episodeFile.name}`,
                                 directory: `${directory}/${title}/`,
                                 fileName: `${episodeFile.name}`,
+                                extension: `${episodeFile.name.split('.').pop()}`,
                                 currentTime: 0,
                             } as MediaEpisode, {root: true})
                             order++

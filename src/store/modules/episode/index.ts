@@ -1,6 +1,6 @@
 import {MediaEpisode} from "@/types/Media"
 import storage from "@/store/modules/storage"
-import Media from "@/store/modules/media";
+// import UpdateEpisodePayload from "./types/UpdateEpisodePayload"
 
 export default {
     namespaced: true,
@@ -25,6 +25,7 @@ export default {
                 if (episodes[i].media_id === payload.media_id && episodes[i].id === payload.id) {
                     episodes[i].directory = payload.directory
                     episodes[i].fileName = payload.fileName
+                    episodes[i].extension = payload.extension
                     episodes[i].fullPath = payload.fullPath
 
                     episodeExists = true
@@ -61,6 +62,16 @@ export default {
             console.log(result)
 
             return result
-        }
+        },
+
+        updateEpisode(_: any , {payload}: {payload: MediaEpisode}) {
+            const episodes = storage.get('episodes') as Array<MediaEpisode>
+
+            const updatedList = episodes.map(episode => {
+                if (episode.id == payload.id && episode.media_id == payload.media_id) {
+                    episode = payload
+                }
+            })
+        },
     },
 }

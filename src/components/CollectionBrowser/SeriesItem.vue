@@ -37,51 +37,57 @@ export default {
       })
     },
 
-    storeSubtitles() {
-
-      console.log(this.files)
-      // fs.readFile(files.image.path, function (err, data) {
-      //
-      //   var imageName = req.files.image.name
-      //
-      //   /// If there's an error
-      //   if(!imageName){
-      //
-      //     console.log("There was an error")
-      //     // res.redirect("/")
-      //     // res.end()
-      //
-      //   } else {
-      //
-      //     var newPath = __dirname + "/uploads/fullsize/" + imageName
-      //
-      //     /// write file to uploads/fullsize folder
-      //     fs.writeFile(newPath, data, function (err) {
-      //
-      //       /// let's see it
-      //       res.redirect("/uploads/fullsize/" + imageName)
-      //
-      //     });
-      //   }
-      // })
-    },
-
     async uploadSubtitles(files) {
-      files.forEach(file => {
-        console.log(file.path)
+      const episode = this.episode
 
-        fs.readFile(file.path, function (err, data) {
+      files.forEach((file) => {
+        console.log(episode)
+
+        fs.readFile(file.path, (err, data) => {
           const fileName = file.name
 
           try {
+            // console.log(this.episode.fileName.split('.'))
+
             console.log(__dirname)
+
+            // var newPath = __dirname + "/uploads/fullsize/" + imageName
           } catch (e) {
             console.log(e)
           }
         })
       })
 
-      const media = await this.$store.getters['media/']
+      // if(!imageName){
+      //
+      //   console.log("There was an error")
+      //   // res.redirect("/")
+      //   // res.end()
+      //
+      // } else {
+      //
+      //   var newPath = __dirname + "/uploads/fullsize/" + imageName
+      //
+      //   /// write file to uploads/fullsize folder
+      //   fs.writeFile(newPath, data, function (err) {
+      //
+      //     /// let's see it
+      //     res.redirect("/uploads/fullsize/" + imageName)
+      //
+      //   });
+      // }
+
+     const episodeInQuestion = await this.$store.getters['episode/episodes'].filter(item =>
+          this.$route.params.media_id == item.media_id && this.$route.params.episode_id == item.id
+      ).pop()
+
+      // fs.readFile(files.image.path, function (err, data) {
+
+      // const newSubtitle =
+      //
+      // episodeInQuestion
+      //
+      // this.$store.dispatch(episodeInQuestion)
     }
   },
 

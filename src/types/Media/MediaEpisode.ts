@@ -1,4 +1,4 @@
-import {Path} from '@/types'
+import {FileExtension, Path} from '@/types'
 import {Subtitle} from "@/types/Media/Subtitle"
 
 export interface MediaEpisode {
@@ -7,6 +7,7 @@ export interface MediaEpisode {
     currentTime: number,
     fullPath: Path,
     fileName: Path,
+    extension: FileExtension,
     directory: Path,
     thumbnail?: Path,
     subtitles?: Array<Subtitle>
