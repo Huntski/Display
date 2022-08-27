@@ -1,6 +1,6 @@
 <template>
   <div class="rounded-lg pb-10">
-    <Spinner class="w-10 m-auto mt-32" v-if="! collection.length" />
+    <Spinner class="w-10 m-auto mt-32 text-gray-300" v-if="! collection.length" />
 
     <div class="media-collection grid gap-5 mt-10" v-else>
       <TransitionGroup name="fade">

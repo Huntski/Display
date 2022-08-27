@@ -9,7 +9,7 @@
       <div class="w-7 h-7">
         <Check class="text-green-500" v-if="status === 'granted'"/>
         <Warning v-else-if="status === 'failed'"/>
-        <Spinner v-else />
+        <Spinner class="text-gray-300" v-else />
       </div>
 
       <span class="italic mx-10">{{ message[this.status] }}</span>

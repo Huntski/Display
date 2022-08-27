@@ -10,52 +10,104 @@
       />
     </div>
 
-    <div class="tracks overflow-y-auto text-white h-screen">
-      <div class="group p-3 flex items-center text-gray-300 border-b border-gray-800 hover:bg-gray-800"
-           :class="{'bg-gray-800' : track.id == activeTrack.id}"
+    <div v-if="loadingSubs && tracks.length < 0" class="my-auto w-full h-full flex flex-col justify-center items-center mx-auto">
+      <Spinner class="w-10 mb-5 text-blue-500" />
+      <span class="text-white">Loading subtitles...</span>
+    </div>
+
+    <div class="scrollbar overflow-y-auto text-white h-screen" :class="{'hidden' : close}">
+      <span class="track group p-3 flex items-center text-gray-300 border-b border-gray-800 hover:bg-gray-800"
+           :class="{'active bg-gray-800' : track.id == this.activeTrack.id || (this.activeTrack.id == '' && this.previousTrackId == track.id)}"
            v-for="track in tracks" :key="track.id"
-           @click="$parent.goToSpecificTimeLine(track.startTime)"
+           @click="goToSpecificTimeLine(track.startTime)"
       >
-        <span>{{track.text}}</span>
-      </div>
+        {{track.text}}
+      </span>
     </div>
   </div>
-
 </template>
 
 <script>
-import {PlainArrow} from "@/components/Icons"
+import {PlainArrow, Spinner} from "@/components/Icons"
 
 export default {
-  props: ['tracks', 'activeTrack'],
+  props: {
+    tracks: {
+      type: [Array, Object]
+    },
 
-  data() {
-    return {
-      close: false
+    activeTrack: {
+      type: Object
+    },
+
+    loading: {
+      type: Boolean,
     }
   },
 
-  components: {PlainArrow}
+  data() {
+    return {
+      close: false,
+      loadingSubs: true,
+      previousTrackId: null
+    }
+  },
+
+  watch: {
+    tracks(newVal) {
+      if (newVal.length) {
+        this.loadingSubs = false
+      }
+    },
+
+    loading() {
+      this.loadingSubs = this.loading
+    },
+
+    activeTrack(newTrack, oldTrack) {
+      this.previousTrackId = oldTrack.id
+
+      this.putActiveIntoView()
+    }
+  },
+
+  computed: {
+    isActiveTrack(track) {
+      if (this.activeTrack.text) {
+        if (track.id == this.activeTrack.id) {
+          return true
+        }
+      }
+
+      return false
+    }
+  },
+
+  methods: {
+    goToSpecificTimeLine(time) {
+      this.$parent.$refs.video.currentTime = time
+    },
+
+    async putActiveIntoView() {
+      setTimeout(() => {
+        const activeElement = document.querySelector('.active')
+
+        if (! this.isInView(activeElement)) {
+          activeElement.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
+        }
+      }, 10)
+    },
+
+    isInView(element) {
+      const rect = element.getBoundingClientRect()
+
+      return rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    }
+  },
+
+  components: {PlainArrow, Spinner}
 }
 </script>
-
-<style scoped>
-.tracks::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-.tracks::-webkit-scrollbar-track {
-  background: #141414;
-}
-
-/* Handle */
-.tracks::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-.tracks::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-</style>

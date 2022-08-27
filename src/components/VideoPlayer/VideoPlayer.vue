@@ -6,8 +6,8 @@
       </router-link>
 
       <div class="w-full h-screen">
-        <video @timeupdate="processBar" ref="video" class="object-contain w-full h-full" autoplay @click="togglePlay" :muted="muted" >
-          <track kind="captions" ref="subs" src="" srclang="jp" label="Japanese" mode="true">
+        <video @timeupdate="videoTimeChangedEvent" ref="video" class="object-contain w-full h-full" autoplay @click="togglePlay" :muted="muted">
+          <track kind="captions" ref="subs" srclang="jp" label="Japanese" mode="true">
         </video>
       </div>
 
@@ -17,9 +17,7 @@
         <div class="w-full px-10 flex flex-col mt-auto items-center h-40">
           <span class="ml-auto text-gray-200">{{ timeLeft }}</span>
 
-          <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden cursor-pointer" @click="processBarClickEvent">
-            <div ref="indicator" class="bg-red-400 w-0 h-full relative" />
-          </div>
+          <ProcessBar ref="processbar" />
 
           <div class="w-full flex items-center justify-between mt-5 text-white">
             <div class="flex w-60">
@@ -32,7 +30,8 @@
             </div>
 
             <div>
-              <div class="bg-gray-900 rounded-full p-5 w-5 h-5 flex justify-center items-center box-content m-auto cursor-pointer" @click="togglePlay">
+              <div
+                  class="bg-gray-900 rounded-full p-5 w-5 h-5 flex justify-center items-center box-content m-auto cursor-pointer" @click="togglePlay">
                 <Pause class="w-4 ml-1" v-if="paused"/>
                 <Play class="w-4" v-else/>
               </div>
@@ -46,7 +45,7 @@
       </div>
     </div>
 
-    <SideTracks :tracks=sideTracks :active-track="activeTrack" />
+    <SideTracks :tracks=sideTracks :active-track="activeTrack"/>
   </div>
 </template>
 
@@ -54,6 +53,7 @@
 import fs from 'fs'
 import {Mute, Pause, Play, Return, Sound, Fullscreen} from '@/components/Icons'
 import SideTracks from "./SideTracks"
+import ProcessBar from './ProcessBar'
 
 export default {
   data() {
@@ -62,11 +62,13 @@ export default {
       episode: null,
       paused: false,
       muted: true,
+      currentTime: 0,
       volume: .5,
       timeLeft: '',
       track: null,
       activeTrack: '',
-      sideTracks: []
+      sideTracks: [],
+      trackMouse: false,
     }
   },
 
@@ -110,30 +112,17 @@ export default {
       this.$refs.video.volume = volume
     },
 
-    processBar() {
-      const curr = (this.$refs.video.currentTime / this.$refs.video.duration) * 100
-      this.$refs.indicator.style.width = `${curr}%`
 
-      const sec = this.$refs.video.duration - this.$refs.video.currentTime
-      let hours = Math.floor(sec / 3600)
-      let minutes = Math.floor((sec - (hours * 3600)) / 60)
-      let seconds = Math.floor(sec - (hours * 3600) - (minutes * 60))
-      if (minutes < 10) {
-        minutes = "0" + minutes
-      }
-      if (seconds < 10) {
-        seconds = "0" + seconds
-      }
-
-      if (hours) {
-        this.timeLeft = hours + ':' + minutes + ':' + seconds
-      }
-
-      return this.timeLeft = minutes + ':' + seconds
+    async videoTimeChangedEvent() {
+      console.log('Video time changed.')
+      this.currentTime = document.querySelector('video').currentTime
+      this.$refs.processbar.processBar()
     },
 
-    processBarClickEvent(e) {
-      console.log(e.offsetX)
+    async syncVideoTimeWithCurrentTime() {
+      console.log('Synced time:', this.currentTime)
+
+      this.$refs.video.currentTime = this.currentTime
     },
 
     openInFullscreen() {
@@ -148,11 +137,6 @@ export default {
       } catch (e) {
         console.log(e)
       }
-    },
-
-    goToSpecificTimeLine(timeline) {
-      console.log('Specific timeline')
-      this.$refs.video.currentTime = timeline
     },
 
     keydownEventHandler(event) {
@@ -172,8 +156,9 @@ export default {
           this.$route.params.media_id == item.media_id && this.$route.params.episode_id == item.id
       ).pop()
 
+      console.log(this.episode)
+
       try {
-        console.log('Episode:', this.episode)
         const videoFile = fs.readFileSync(this.episode.fullPath)
         this.fileURL = URL.createObjectURL(new Blob([videoFile]))
         this.$refs.video.src = this.fileURL
@@ -199,15 +184,13 @@ export default {
 
       setTimeout(() => {
         this.sideTracks = this.$refs.video.textTracks[0].cues
-
-        console.log('Sidetracks:', this.sideTracks)
       }, 100)
 
       e1.track.addEventListener('cuechange', (e2) => {
         const cues = e2.currentTarget.activeCues
         const activeTrack = e2.currentTarget.activeCues[0]
 
-        if (! cues.length) {
+        if (!cues.length) {
           this.activeTrack = {
             id: '',
             text: ''
@@ -215,13 +198,11 @@ export default {
         } else {
           this.activeTrack = activeTrack
         }
-
-        console.log('Active Track:', this.activeTrack)
       })
     })
   },
 
-  components: {SideTracks, Return, Play, Pause, Sound, Mute, Fullscreen}
+  components: {SideTracks, ProcessBar, Return, Play, Pause, Sound, Mute, Fullscreen}
 }
 </script>
 

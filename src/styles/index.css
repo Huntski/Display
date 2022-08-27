@@ -14,3 +14,25 @@ p {
     @apply mb-5;
     color: #454545;
 }
+
+/* Scrollbar */
+.scrollbar::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background: #141414;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Without scrollbar */
+.noscrollbar::-webkit-scrollbar {
+    display: none;
+}

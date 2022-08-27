@@ -28,7 +28,7 @@
         <Triangle/>
       </button>
 
-      <Spinner v-if="loading" class="w-10 ml-3"/>
+      <Spinner v-if="loading" class="w-10 ml-3 text-gray-300"/>
 
       <div v-else class="w-10 ml-3"></div>
     </div>
