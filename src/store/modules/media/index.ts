@@ -1,11 +1,13 @@
 import fs from "fs"
-import storage from "@/store/modules/storage"
+import storage, {StorageKey} from "@/store/modules/storage"
 import directory from "../directory"
 import {Commit, Dispatch} from "vuex"
-import {MediaItem, AnlistMediaItem, MediaEpisode} from "@/types/Media"
+import {MediaItem, AnlistMediaItem, MediaEpisode, Subtitle} from "@/types/Media"
 import {Path} from "@/types"
 import {StateMedia as State} from "./types/StateMedia"
 import ScannedMediaResponse from './types/ScannedMediaResponse'
+
+const key: StorageKey = 'media'
 
 export default {
     namespaced: true,
@@ -95,7 +97,7 @@ export default {
                         media.id = Math.floor(Math.random() * 99999)
                     }
 
-                    let order = 1;
+                    let order = 1
 
                     episodeFiles.forEach(episodeFile => {
                         if (episodeFile.name.includes('mp4') || episodeFile.name.includes('mov')) {
@@ -174,7 +176,7 @@ export default {
         },
 
         searchMediaTitle({ commit, state }: { commit: Commit, state: State }, query: string): void {
-            let result;
+            let result
 
             if (query === '') {
                 result = state.media
@@ -187,9 +189,11 @@ export default {
             commit('SET_DISPLAYED_MEDIA', result)
         },
 
-        // getMediaItem({ state }: { state: any }, id: number): MediaItem {
-        //     return state.media.filter((item: MediaItem) => id == item.id).pop()
-        // }
+        getMediaItemById({ commit, state }: { commit: Commit, state: State }, id: number) {
+            const media = storage.get(key) as Array<MediaItem>
+
+            return media.filter(item => item.id == id)[0]
+        }
     },
 
     modules: {

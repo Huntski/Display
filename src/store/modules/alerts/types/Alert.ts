@@ -1,5 +1,5 @@
 export interface Alert {
-    id: number,
+    id?: number,
     message: string,
     error?: boolean
 }

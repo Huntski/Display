@@ -85,7 +85,7 @@ export default {
 
   methods: {
     goToSpecificTimeLine(time) {
-      this.$parent.$refs.video.currentTime = time
+      this.$parent.$refs.video.currentTime = time + 0.01
     },
 
     async putActiveIntoView() {

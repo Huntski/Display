@@ -1,19 +1,20 @@
 import {MediaEpisode} from "@/types/Media"
-import storage from "@/store/modules/storage"
-// import UpdateEpisodePayload from "./types/UpdateEpisodePayload"
+import storage, {StorageKey} from "@/store/modules/storage"
+
+const key: StorageKey = 'episodes'
 
 export default {
     namespaced: true,
 
     getters: {
         episodes() {
-            return storage.get('episodes') as Array<MediaEpisode>
+            return storage.get(key) as Array<MediaEpisode>
         }
     },
 
     actions: {
         storeEpisode(_: any, payload: MediaEpisode): void {
-            const episodes = storage.get('episodes') as Array<MediaEpisode>
+            const episodes = storage.get(key) as Array<MediaEpisode>
 
             const existingFile = episodes.filter(item =>
                 item.media_id === payload.media_id && item.id === payload.id
@@ -37,23 +38,29 @@ export default {
                 episodes.push(payload)
             }
 
-            storage.set('episodes', episodes)
-        },
-
-        episodeExists(_: any, {media_id, order}: { media_id: number, order: number }) {
-            const episodes = storage.get('episodes') as Array<MediaEpisode>
+            storage.set(key, episodes)
         },
 
         getMediaEpisodesById(_: any, id: number): MediaEpisode[] {
-            const episodes = storage.get('episodes') as Array<MediaEpisode>
+            const episodes = storage.get(key) as Array<MediaEpisode>
 
             const result = episodes.filter(item => item.media_id === id)
 
             return result
         },
 
+        getEpisode(_: any, {media_id, episode_id}: {media_id: number, episode_id: number}): MediaEpisode|undefined {
+            const episodes = storage.get(key) as Array<MediaEpisode>
+
+            const episode = episodes.filter(item => item.media_id == media_id && item.id == episode_id).pop()
+
+            console.log('Got episode:', episode)
+
+            return episode
+        },
+
         searchEpisodeById(_: any, id: number): MediaEpisode {
-            const episodes = storage.get('episodes') as Array<MediaEpisode>
+            const episodes = storage.get(key) as Array<MediaEpisode>
 
             console.log('episodes:', episodes)
 
@@ -65,13 +72,15 @@ export default {
         },
 
         updateEpisode(_: any , {payload}: {payload: MediaEpisode}) {
-            const episodes = storage.get('episodes') as Array<MediaEpisode>
+            const episodes = storage.get(key) as Array<MediaEpisode>
 
             const updatedList = episodes.map(episode => {
                 if (episode.id == payload.id && episode.media_id == payload.media_id) {
                     episode = payload
                 }
             })
+
+            storage.set(key, updatedList)
         },
     },
 }

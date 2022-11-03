@@ -33,6 +33,9 @@ export default {
         },
 
         error({commit}: { commit: Commit }, alert: Alert) {
+            if (! alert.id) {
+                alert.id = Math.floor(Math.random() * 9999) + 1
+            }
             alert.error = true
             commit('ADD_ALERT', alert)
         },

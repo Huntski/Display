@@ -12,6 +12,8 @@ module.exports = {
         'primary-gold': '#B19017',
         'primary-gold-bright': '#d3ab16',
         'transparent': '#ffffff00',
+        'dark-transparent': 'rgba(0,0,0,0.53)',
+        'light-transparent': 'rgba(255,255,255,0.27)',
         'controls': '#000'
       },
       boxShadow: {
@@ -20,6 +22,15 @@ module.exports = {
       rotate: {
         '135': '135deg',
       },
+      borderWidth: {
+        '5': '5px'
+      },
+      zIndex: {
+        '60': '60'
+      },
+      cursor: {
+        'hide': 'none'
+      }
     },
     fontFamily: {
       'primary': ['Nunito', 'sans-serif'],

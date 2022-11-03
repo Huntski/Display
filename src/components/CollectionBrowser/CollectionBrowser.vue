@@ -2,7 +2,7 @@
   <div class="rounded-lg pb-10">
     <Spinner class="w-10 m-auto mt-32 text-gray-300" v-if="! collection.length" />
 
-    <div class="media-collection grid gap-5 mt-10" v-else>
+    <div class="media-collection flex flex-wrap lg:grid gap-5 mt-10" v-else>
       <TransitionGroup name="fade">
         <CollectionItem
             v-for="(item, index) in collection" :key="index" :media="item"

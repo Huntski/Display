@@ -1,7 +1,6 @@
 <template>
   <div id="processbar" ref="processbar" class="w-full h-2 bg-gray-800 rounded-full cursor-pointer"
        @mousedown="processBarMouseDownEvent"
-       @mouseup="processBarMouseUpEvent"
   >
     <div ref="indicator" class="bg-red-400 w-0 h-full relative pointer-events-none rounded-full relative flex justify-end items-center">
       <div class="absolute -right-2 w-5 h-5 rounded-full bg-red-600"></div>
@@ -44,7 +43,6 @@ export default {
 
     async processBarMouseDownEvent(mouseEvent) {
       this.$parent.currentTime = this.processBarTrackMouse(mouseEvent)
-      this.currentTime
 
       const video = document.querySelector('video')
       this.previousVideoPauseStatus = video.paused
@@ -54,7 +52,6 @@ export default {
       }
 
       this.$parent.currentTime = this.processBarTrackMouse(mouseEvent)
-      this.currentTime
 
       this.trackMouse = true
     },

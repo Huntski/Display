@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import fs from 'fs'
-
 export default {
   props: ['episode'],
 
@@ -36,72 +34,6 @@ export default {
         }
       })
     },
-
-    async uploadSubtitles(files) {
-      const episode = this.episode
-
-      files.forEach((file) => {
-        console.log(episode)
-
-        fs.readFile(file.path, (err, data) => {
-          const fileName = file.name
-
-          try {
-            // console.log(this.episode.fileName.split('.'))
-
-            console.log(__dirname)
-
-            // var newPath = __dirname + "/uploads/fullsize/" + imageName
-          } catch (e) {
-            console.log(e)
-          }
-        })
-      })
-
-      // if(!imageName){
-      //
-      //   console.log("There was an error")
-      //   // res.redirect("/")
-      //   // res.end()
-      //
-      // } else {
-      //
-      //   var newPath = __dirname + "/uploads/fullsize/" + imageName
-      //
-      //   /// write file to uploads/fullsize folder
-      //   fs.writeFile(newPath, data, function (err) {
-      //
-      //     /// let's see it
-      //     res.redirect("/uploads/fullsize/" + imageName)
-      //
-      //   });
-      // }
-
-     const episodeInQuestion = await this.$store.getters['episode/episodes'].filter(item =>
-          this.$route.params.media_id == item.media_id && this.$route.params.episode_id == item.id
-      ).pop()
-
-      // fs.readFile(files.image.path, function (err, data) {
-
-      // const newSubtitle =
-      //
-      // episodeInQuestion
-      //
-      // this.$store.dispatch(episodeInQuestion)
-    }
   },
-
-  mounted() {
-    ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(function (evt) {
-      this.$refs.seriesItem.addEventListener(evt, function (e) {
-        e.preventDefault()
-        e.stopPropagation()
-      }.bind(this), false)
-    }.bind(this))
-
-    this.$refs.seriesItem.addEventListener('drop', e => {
-      this.uploadSubtitles(e.dataTransfer.files)
-    })
-  }
 }
 </script>

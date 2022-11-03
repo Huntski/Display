@@ -1,6 +1,10 @@
-import {Language, Path} from "@/types";
+import {Language, Path, FileName} from "@/types";
 
 export interface Subtitle {
-    src: Path,
+    id: number,
+    episode_id: number,
+    media_id: number,
+    path: Path,
+    fileName: FileName,
     lan?: Language
 }
