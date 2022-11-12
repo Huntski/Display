@@ -38,10 +38,6 @@ async function createWindow() {
         return result
     })
 
-    ipcMain.handle('open-full-screen', (event, arg) => {
-        // Open full screen
-    })
-
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         await window.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string)
         if (!process.env.IS_TEST) window.webContents.openDevTools()

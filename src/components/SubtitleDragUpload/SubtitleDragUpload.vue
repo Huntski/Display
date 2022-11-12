@@ -4,7 +4,7 @@
     class="bg-dark-transparent px-20 py-10 absolute top-0 left-0 w-screen h-screen max-h-screen z-50 opacity-0 pointer-events-none"
     :class="{'pointer-events-auto opacity-100' : show}"
   >
-    <div class="w-auto h-full border-4 border-white rounded-xl border-dashed border-5 flex flex-col justify-center items-center bg-light-transparent">
+    <div class="w-auto h-full border-white rounded-xl border-dashed border-5 flex flex-col justify-center items-center bg-light-transparent">
       <Document class="w-16" />
       <h2 class="text-white mt-10">Drop to add subtitles.</h2>
     </div>

@@ -5,7 +5,7 @@ import {Commit, Dispatch} from "vuex"
 import {MediaItem, AnlistMediaItem, MediaEpisode, Subtitle} from "@/types/Media"
 import {Path} from "@/types"
 import {StateMedia as State} from "./types/StateMedia"
-import ScannedMediaResponse from './types/ScannedMediaResponse'
+import ScannedMediaResponse from "./types/ScannedMediaResponse"
 
 const key: StorageKey = 'media'
 

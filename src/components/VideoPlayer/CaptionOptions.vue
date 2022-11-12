@@ -13,11 +13,27 @@
 
     <div
         ref="options"
-        class="absolute mb-28 -bottom-full -right-1 option rounded mx-auto bg-gray-800 z-40"
+        class="absolute mb-28 -bottom-full -right-1 option rounded-lg mx-auto bg-gray-800 z-40"
         v-show="show"
         @mouseleave="show = false"
     >
+
       <div class="w-80 h-80 overflow-auto">
+        <input type="file" id="subtitle-upload" class="hidden" accept=".vtt,.ass,.srt">
+
+        <label
+            for="subtitle-upload"
+            v-if="subtitles < 1" class="cursor-pointer hover:bg-gray-700 w-72 h-72 m-4 gap-5 border-dashed border-2 rounded-lg flex flex-col items-center justify-center"
+        >
+          <span class="text-sm">
+            No subtitles found.
+          </span>
+
+          <Document class="w-12" />
+
+          <h3 class="font-bold text-lg">Select file</h3>
+        </label>
+
         <div class="text-white text-sm overflow-hidden w-full flex items-center overflow-ellipsis hover:bg-gray-800 rounded cursor-pointer"
              v-for="subtitle in subtitles" :key="subtitle.src"
              :class="{'bg-gray-800' : current === subtitle.id}"
@@ -42,13 +58,13 @@
 </template>
 
 <script>
-import {Captions, Trashcan} from "@/components/Icons"
+import {Captions, Trashcan, Document} from "@/components/Icons"
 import {Confirmation} from "@/components/Confirmation"
 
 export default {
   props: {
     subtitles: {
-      type: Object,
+      type: [Object, Array],
       required: false,
     },
     current: {
@@ -65,6 +81,10 @@ export default {
   },
 
   methods: {
+    uploadSubtitles() {
+       // Select multiple subtitles via file selector
+    },
+
     loadInSubtitle(subtitle) {
       this.$parent.displayCaptionSelect = false
       this.$parent.loadInSubtitle(subtitle)
@@ -88,7 +108,7 @@ export default {
     },
   },
 
-  components: {Captions, Trashcan, Confirmation}
+  components: {Captions, Trashcan, Confirmation, Document}
 }
 </script>
 
