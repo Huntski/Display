@@ -1,7 +1,9 @@
 <img width=100px height=100px src="logo.png" />
 
 # 🍻 Display
-Created to make _**Your Life**_ easier when learning Japanese from Anime!
+Tired of spending **3 hours** downloading plugins only for learning Japanese from shows?
+
+***Then you're at the right place!!***
 
 Display is a program designed to cut down the process of downloading a movie player, installing plugins
 and setting every thing up right with Anki to watch downloaded Anime.
