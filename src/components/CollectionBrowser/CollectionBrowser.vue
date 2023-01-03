@@ -25,6 +25,8 @@ import SeriesInspectPopup from './SeriesInspectPopup'
 import {Spinner} from "@/components/@icons"
 
 export default {
+  name: "CollectionBrowser",
+
   props: {
     collection: {
       type: Array,

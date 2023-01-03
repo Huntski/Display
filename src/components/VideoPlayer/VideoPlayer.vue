@@ -83,7 +83,7 @@ import SideTracks from "./SideTracks"
 import ProcessBar from './ProcessBar'
 import CaptionOptions from "./CaptionOptions"
 import SpeedOptions from "./SpeedOptions"
-import useThumbnail from "@/composables/useThumbnail"
+import useThumbnail from "@/composables/useDownloadThumbnail"
 
 export default {
   name: 'VideoPlayer',

@@ -1,6 +1,6 @@
 <template>
   <Popup>
-    <div class="popup series bg-primary-dark-menu overflow-auto mt-10 rounded-2xl z-50">
+    <div class="popup series bg-primary-dark-menu mt-10 rounded-2xl z-50">
 
       <div class="h-52 rounded-t-2xl relative text-white w-full bg-no-repeat bg-cover bg-center"
            v-bind:style="{ 'background-image': 'url(' + media.coverImage + ')' }"
@@ -42,6 +42,8 @@ export default {
 
   async created() {
     this.episodes = await this.$store.dispatch('episode/getMediaEpisodesById', this.media.id)
+
+    console.log(this.episodes)
   },
 
   components: {Popup, Exit, SeriesItem}
