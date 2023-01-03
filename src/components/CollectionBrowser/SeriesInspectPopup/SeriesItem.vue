@@ -3,7 +3,7 @@
       class="series-item cursor-pointer media-item h-32 rounded-lg bg-white bg-center bg-cover relative flex group"
       ref="seriesItem"
   >
-    <img v-if="episode.thumbnail" src="/Users/wieb/Documents/Films/憑物語/media_20918-episode_2.jpg" class="absolute transition object-cover h-full w-full rounded-lg"/>
+    <img v-if="episode.thumbnail" :src="episode.thumbnail" class="absolute transition object-cover h-full w-full rounded-lg"/>
 
     <OptionsMenu class="relative ml-auto m-2 opacity-0 group-hover:opacity-100" :options="optionsForOptionsMenu" />
 
@@ -19,6 +19,7 @@
 <script>
 import OptionsMenu from "@/components/OptionsMenu"
 import useDownloadThumbnail from "@/composables/useDownloadThumbnail"
+import {ipcRenderer} from "electron"
 
 export default {
   props: {
@@ -46,17 +47,20 @@ export default {
       })
     },
 
-    downloadEpisodeThumbnail() {
+    async downloadEpisodeThumbnail() {
       // TODO: Create correct output directory when making thumbnail. Currently it doesn't work if directory does not exist.
 
-      const directory = this.episode.directory
+      // console.log(await ipcRenderer.invoke('get-root-directory'))
+
+      const directory = await ipcRenderer.invoke('get-root-directory') + 'public/storage/'
+
       const thumbnailFileName = `media_${this.episode.media_id}-episode_${this.episode.id}.jpg`
       const thumbnailFullPath = directory + thumbnailFileName
 
       useDownloadThumbnail(this.episode.fullPath, thumbnailFullPath)
 
       const episode = this.episode
-      episode.thumbnail = thumbnailFullPath
+      episode.thumbnail = 'storage/' + thumbnailFileName
 
       this.$store.dispatch('episode/updateEpisode', episode)
     },
