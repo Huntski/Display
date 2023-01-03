@@ -1,5 +1,5 @@
 <div style="display: flex; align-items: center">
-    <img width=100px height=100px src="logo.png" />
+    <img width=100px height=100px src="public/logo.png" />
     <h1 style="margin: 0; padding: 40px;">Display</h1>
 </div>
 
