@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import {Play} from "@/components/Icons"
+import {Play} from "@/components/@icons"
 
 export default {
   props: {

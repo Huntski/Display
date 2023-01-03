@@ -1,9 +1,10 @@
 <template>
   <Popup>
-    <div class="popup series overflow-auto mt-10 rounded-2xl z-50">
+    <div class="popup series bg-primary-dark-menu overflow-auto mt-10 rounded-2xl z-50">
 
       <div class="h-52 rounded-t-2xl relative text-white w-full bg-no-repeat bg-cover bg-center"
-           v-bind:style="{ 'background-image': 'url(' + media.coverImage + ')' }">
+           v-bind:style="{ 'background-image': 'url(' + media.coverImage + ')' }"
+      >
         <div class="absolute rounded-t-2xl cover top-0 px-10 left-0 w-full h-full">
           <h1 class="pt-14 text-xl font-light">Series</h1>
           <h2 class="text-5xl font-jap">{{ media.title.native }}</h2>
@@ -22,11 +23,15 @@
 
 <script>
 import Popup from '@/components/Popup'
-import {Exit} from '@/components/Icons'
-import SeriesItem from './SeriesItem'
+import {Exit} from '@/components/@icons'
+import SeriesItem from "@/components/CollectionBrowser/SeriesInspectPopup/SeriesItem"
 
 export default {
-  props: ['media'],
+  name: "SeriesInspectPopup",
+
+  props: {
+    media: Object,
+  },
 
   data() {
     return {
@@ -45,9 +50,8 @@ export default {
 
 <style scoped>
 .series {
-  width: 560px;
-  height: 700px;
-  background: #141414;
+  width: 660px;
+  min-height: 800px;
   box-shadow: 0 10px 20px #00000070;
 }
 

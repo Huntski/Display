@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {Search} from "@/components/Icons"
+import {Search} from "@/components/@icons"
 
 export default {
   components: {Search},

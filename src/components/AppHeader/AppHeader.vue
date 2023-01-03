@@ -21,7 +21,7 @@
 
 <script>
 import SearchInput from './SearchInput'
-import {Upload} from '@/components/Icons'
+import {Upload} from '@/components/@icons'
 import {UploadMedia} from '@/components/UploadMedia'
 import {AccountDropdown} from "@/components/AccountDropdown"
 

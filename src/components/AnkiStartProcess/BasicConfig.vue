@@ -14,7 +14,7 @@
 
 <script>
 import {Select} from "@/components/Fields"
-import {ButtonPrimary} from "@/components/Buttons"
+import {ButtonPrimary} from "@/components/@buttons"
 
 export default {
   props: ['status'],

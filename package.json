@@ -16,6 +16,7 @@
   "dependencies": {
     "@electron/remote": "^2.0.5",
     "@tailwindcss/postcss7-compat": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "@unaxiom/ffmpeg": "^0.1.2",
     "ass-to-vtt": "^1.2.0",
     "autoprefixer": "^9.8.8",
     "axios": "^0.26.0",
@@ -23,7 +24,6 @@
     "click-outside-vue3": "^4.0.1",
     "electron-db": "^0.15.7",
     "electron-store": "^8.0.1",
-    "ffmpeg": "^0.0.4",
     "fs-thumbnail": "^1.0.9",
     "postcss": "^7.0.39",
     "sharp": "0",

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {Warning, RoundedCheck} from "@/components/Icons"
+import {Warning, RoundedCheck} from "@/components/@icons"
 
 export default {
   props: {

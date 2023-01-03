@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-import {Logo} from "@/components/Icons"
+import {Logo} from "@/components/@icons"
 import SetupForm from "@/components/SetupForm"
 import {PreviewSlide} from '@/components/PreviewSlide'
 

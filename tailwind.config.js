@@ -14,7 +14,8 @@ module.exports = {
         'transparent': '#ffffff00',
         'dark-transparent': 'rgba(0,0,0,0.53)',
         'light-transparent': 'rgba(255,255,255,0.27)',
-        'controls': '#000'
+        'controls': '#000',
+        'primary-dark-menu': '#141414',
       },
       boxShadow: {
         '3xl': '0 0 60px -15px rgba(0, 0, 0, 0.3)',
@@ -45,6 +46,7 @@ module.exports = {
       borderWidth: ['active'],
       rotate: ['group-hover'],
       scale: ['group-hover'],
+      visible: ['group-hover']
     }
   },
 }

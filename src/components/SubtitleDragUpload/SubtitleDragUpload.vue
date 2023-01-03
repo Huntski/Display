@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {Document} from "@/components/Icons"
+import {Document} from "@/components/@icons"
 import fs from "fs"
 import srt2vtt from "srt-to-vtt"
 import ass2vtt from 'ass-to-vtt'
@@ -20,7 +20,7 @@ import ass2vtt from 'ass-to-vtt'
 export default {
   props: {
     episode: {
-      type: Object,
+      type: [Object],
       required: true,
     },
 
@@ -30,13 +30,18 @@ export default {
     }
   },
 
-  data() {
+  data: () => {
     return {
       show: false,
     }
   },
 
   methods: {
+    /**
+     *  Stores a new entry for each given subtitle.
+     * @param files List of all uploaded subtitle files.
+     * @returns {Promise<void>}
+     */
     async uploadSubtitles(files) {
       try {
         const episode = this.episode
@@ -65,8 +70,11 @@ export default {
               fileName: newVttFileName
             }
 
-            return this.$store.dispatch('subtitle/storeSubtitles', newSubtitle).then(() => {
-              this.$emit('handleUpload', newSubtitle)
+            this.$store.dispatch('subtitle/storeSubtitles', newSubtitle)
+                .then(() => this.$emit('handleUpload', newSubtitle))
+
+            return this.$store.dispatch('alerts/notify', {
+              message: 'Uploaded subtitle successfully!'
             })
           }
 
@@ -83,10 +91,10 @@ export default {
   },
 
   mounted() {
-    const target = window
+    let target = window
 
-    if (! this.global) {
-      const target = this.$refs.upload
+    if (! this.global) { // I forgot why global is there in the first place.
+      target = this.$refs.upload
     }
 
     ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(function (evt) {
@@ -96,18 +104,18 @@ export default {
       }.bind(this), false)
     }.bind(this))
 
-    target.addEventListener('dragenter', e => {
-      this.show = true
-    })
-
-    this.$refs.upload.addEventListener('dragleave', e => {
+    this.$refs.upload.ondragleave = () => {
       this.show = false
-    })
+    }
 
-    target.addEventListener('drop', e => {
+    target.ondragenter = () => {
+      this.show = true
+    }
+
+    target.ondrop = e => {
       this.uploadSubtitles(e.dataTransfer.files)
       this.show = false
-    })
+    }
   },
 
   components: {Document},

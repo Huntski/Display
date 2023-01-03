@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import {Spinner, Check, Warning, Retry} from "@/components/Icons"
+import {Spinner, Check, Warning, Retry} from "@/components/@icons"
 import electron from 'electron'
 
 export default {

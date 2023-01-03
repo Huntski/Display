@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {PlainArrow, Spinner} from "@/components/Icons"
+import {PlainArrow, Spinner} from "@/components/@icons"
 
 export default {
   props: {
@@ -99,6 +99,8 @@ export default {
     },
 
     isInView(element) {
+      if (!element) return
+
       const rect = element.getBoundingClientRect()
 
       return rect.top >= 0 &&

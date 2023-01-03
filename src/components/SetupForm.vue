@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import {Help, Fire, Spinner, Triangle} from '@/components/Icons'
+import {Help, Fire, Spinner, Triangle} from '@/components/@icons'
 import Popup from '@/components/Popup'
 import {FolderSelect} from "@/components/Fields"
 

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {ButtonPrimary, ButtonSecondary} from "@/components/Buttons"
+import {ButtonPrimary, ButtonSecondary} from "@/components/@buttons"
 import {Select} from "@/components/Fields"
 
 export default {

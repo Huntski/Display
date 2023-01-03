@@ -23,26 +23,16 @@ export default {
     },
 
     actions: {
-        storeSubtitles({ commit }: { commit: Commit }, payload: Subtitle): void {
-            const subtitles = storage.get(key) as Array<Subtitle>
+        storeSubtitles(_: any, payload: Subtitle): void {
+            try {
+                const subtitles = storage.get(key) as Array<Subtitle>
 
-            let subtitleExists = false
-
-            for (let i = 0; i < subtitles.length; i++) {
-                if (subtitles[i].fileName === payload.fileName && subtitles[i].id === payload.id) {
-                    subtitles[i].path = payload.path
-                    subtitles[i].lan = payload.lan
-
-                    subtitleExists = true
-                    break
-                }
-            }
-
-            if (! subtitleExists) {
                 subtitles.push(payload)
-            }
 
-            storage.set(key, subtitles)
+                storage.set(key, subtitles)
+            } catch (e) {
+                console.error('Storage:', e)
+            }
         },
 
         getNewSubtitleId(_: any): SubtitleId {
@@ -66,14 +56,17 @@ export default {
             const updatedCollection = subtitles.filter(item => item.path !== path)
 
             commit('SET_SUBTITLES', updatedCollection)
-
         },
 
         getEpisodeSubtitles(_: any, {media_id, episode_id}: {media_id: number, episode_id: number}): Subtitle[] {
             const subtitles = storage.get(key) as Array<Subtitle>
             console.log('Amount of subs:', storage.get('subtitles'))
 
-            return subtitles.filter(item => item.media_id == media_id && item.episode_id == episode_id)
+            const result = subtitles.filter(item => item.media_id == media_id && item.episode_id == episode_id)
+
+            console.log(result)
+
+            return result
         }
     }
 }

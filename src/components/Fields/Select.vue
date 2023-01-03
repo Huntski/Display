@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {SelectArrow} from "@/components/Icons"
+import {SelectArrow} from "@/components/@icons"
 
 export default {
   props: {

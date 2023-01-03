@@ -14,6 +14,7 @@
     "types": [
       "webpack-env"
     ],
+    "allowJs": true,
     "paths": {
       "@/*": [
         "src/*"
@@ -24,6 +25,10 @@
       "dom",
       "dom.iterable",
       "scripthost"
+    ],
+    "typeRoots": [
+      "./typings",
+      "./node_modules/@types/"
     ]
   },
   "include": [
@@ -35,5 +40,5 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }

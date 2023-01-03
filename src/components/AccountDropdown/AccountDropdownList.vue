@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import {Settings, Reload} from "@/components/Icons"
+import {Settings, Reload} from "@/components/@icons"
 import Avatar from "./Avatar"
 
 export default {

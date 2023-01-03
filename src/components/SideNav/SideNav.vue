@@ -93,9 +93,14 @@ export default {
 a:not(.logo) {
   @apply opacity-40 flex items-center py-4;
 
-  &.router-link-exact-active,
+  &.router-link-exact-active {
+    @apply opacity-100 rounded-2xl;
+    background: #efefef;
+  }
+
   &:hover {
-    @apply opacity-100 rounded-2xl bg-gray-100;
+    @apply opacity-100 rounded-2xl;
+    background: #f6f6f6;
   }
 
   svg {

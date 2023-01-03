@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import {Speed} from "@/components/Icons"
+import {Speed} from "@/components/@icons"
 
 export default {
   data() {

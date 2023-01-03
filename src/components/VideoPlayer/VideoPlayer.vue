@@ -1,6 +1,6 @@
 <template>
   <div class="video-player relative w-full bg-black flex w-screen" tabindex="0" @mousemove="mouseShowTimeout">
-    <SubtitleDragUpload @handleUpload="handleUpload" :global="true" :episode="episode" />
+    <SubtitleDragUpload @handleUpload="handleUpload" :global="true" :episode="episode"/>
 
     <div class="relative flex flex-1 flex-col h-full min-h-screen">
 
@@ -10,7 +10,8 @@
         </router-link>
 
         <div>
-          <span class="text-white italic text-lg">Watching episode {{episode ? episode.id : ''}} of {{media ? media.name : ''}}.</span>
+          <span
+              class="text-white italic text-lg">Watching episode {{ episode ? episode.id : '' }} of {{ media ? media.name : '' }}.</span>
         </div>
 
         <div class="w-7"></div>
@@ -26,13 +27,15 @@
         </video>
       </div>
 
-      <div id="controls" class="absolute bottom-0 controls w-full h-64 flex flex-col text-white py-3 flex flex-col items-center h-40 transition">
-        <span class="text-white text-center absolute text-3xl font-light mx-10" style="text-shadow: 0 1px 1px #000000, 0 1px 10px #000000">{{ activeTrack.text }}</span>
+      <div id="controls"
+           class="absolute bottom-0 controls w-full h-64 flex flex-col text-white py-3 flex flex-col items-center h-40 transition">
+        <span class="text-white text-center absolute text-3xl font-light mx-10"
+              style="text-shadow: 0 1px 1px #000000, 0 1px 10px #000000">{{ activeTrack.text }}</span>
 
         <div class="w-full px-10 flex flex-col mt-auto items-center h-40" :class="{'opacity-0' : !this.showControls}">
           <span class="ml-auto text-gray-200">{{ timeLeft }}</span>
 
-          <ProcessBar ref="processbar" />
+          <ProcessBar ref="processbar"/>
 
           <div class="w-full flex items-center justify-between mt-5 text-white">
             <div class="flex w-60">
@@ -41,7 +44,8 @@
                 <Sound v-else/>
               </div>
 
-              <input @input="changeVolume" v-model="volume" type="range" step=".1" min="0" max="1" class="cursor-pointer">
+              <input @input="changeVolume" v-model="volume" type="range" step=".1" min="0" max="1"
+                     class="cursor-pointer">
             </div>
 
             <div>
@@ -55,11 +59,12 @@
             </div>
 
             <div class="w-60 flex justify-end items-center gap-5">
-              <SpeedOptions />
+              <SpeedOptions/>
 
-              <CaptionOptions :current="loadedSubtitleId" :subtitles="videoSubtitles" />
+              <CaptionOptions :current="loadedSubtitleId" :subtitles="videoSubtitles"/>
 
-              <Fullscreen class="w-5 box-content p-3 transform hover:scale-125 transition cursor-pointer" @click="openInFullscreen"/>
+              <Fullscreen class="w-5 box-content p-3 transform hover:scale-125 transition cursor-pointer"
+                          @click="openInFullscreen"/>
             </div>
           </div>
         </div>
@@ -72,15 +77,18 @@
 
 <script>
 import fs from 'fs'
-import {Mute, Pause, Play, Return, Sound, Fullscreen} from '@/components/Icons'
+import {Mute, Pause, Play, Return, Sound, Fullscreen} from '@/components/@icons'
+import SubtitleDragUpload from "@/components/SubtitleDragUpload"
 import SideTracks from "./SideTracks"
 import ProcessBar from './ProcessBar'
-import SubtitleDragUpload from "@/components/SubtitleDragUpload"
 import CaptionOptions from "./CaptionOptions"
 import SpeedOptions from "./SpeedOptions"
+import useThumbnail from "@/composables/useThumbnail"
 
 export default {
-  data() {
+  name: 'VideoPlayer',
+
+  data: () => {
     return {
       videoSubtitles: [],
       loadedSubtitleId: null,
@@ -105,6 +113,10 @@ export default {
   },
 
   methods: {
+    /**
+     * Toggles the pause value of the video element.
+     * @return void
+     */
     togglePlay() {
       const video = document.querySelector('video')
 
@@ -134,6 +146,9 @@ export default {
       }
     },
 
+    /**
+     * Change the volume of the video element. This will also unmute if muted.
+     */
     changeVolume(e) {
       const volume = e.target.value
 
@@ -146,7 +161,10 @@ export default {
       this.$refs.video.volumes = volume
     },
 
-
+    /**
+     * Updates the current time on the processbar.
+     * @returns {Promise<void>}
+     */
     async videoTimeChangedEvent() {
       const video = document.querySelector('video')
       if (video) {
@@ -161,6 +179,10 @@ export default {
       this.$refs.video.currentTime = this.currentTime
     },
 
+    /**
+     * Toggles opening the current video in fullscreen.
+     * @return void
+     */
     openInFullscreen() {
       try {
         const player = document.querySelector('.video-player')
@@ -180,6 +202,7 @@ export default {
         this.togglePlay()
       }
 
+      // Toggle full screen when F key is pressed.
       if (event.keyCode === 70) {
         this.openInFullscreen()
       }
@@ -205,21 +228,24 @@ export default {
       this.$refs.video.src = this.fileURL
     },
 
-    loadInSubtitle(subtitle) { // /Users/wieb/Documents/Films/憑物語/Tsukimonogatari - 01 (BD 1280x720 AVC AACx2).vtt
-      console.log('load in subtitles', subtitle)
+    loadInSubtitle(subtitle) {
+      // /Users/wieb/Documents/Films/憑物語/Tsukimonogatari - 01 (BD 1280x720 AVC AACx2).vtt
+      console.log('Load in subtitles', subtitle)
+
       const subtitleFile = fs.readFileSync(subtitle.src, 'utf8')
       this.$refs.subs.src = URL.createObjectURL(new Blob([subtitleFile]))
       this.loadedSubtitleId = subtitle.id
     },
 
-    handleUpload(newSubtitle) {
-      this.getSubtitles()
+    async handleUpload(newSubtitle) {
+      console.log('got new subtitle')
+      await this.getSubtitles()
       this.loadInSubtitle(newSubtitle)
     },
 
     async getSubtitles() {
       this.videoSubtitles = await this.$store.dispatch('subtitle/getEpisodeSubtitles', this.storagePayload)
-      console.log(this.videoSubtitles)
+      console.log('Get subtitles:', this.videoSubtitles)
     },
 
     async getEpisodeFromStore() {
@@ -247,13 +273,13 @@ export default {
     addTrackEventHandler() {
       document.querySelector('track').track.mode = 'hidden'
 
-      this.$refs.video.textTracks.addEventListener('addtrack', (e1) => {
+      this.$refs.video.textTracks.onaddtrack = e1 => {
         console.log('Add track event')
         setTimeout(() => {
           this.sideTracks = this.$refs.video.textTracks[0].cues
         }, 100)
 
-        e1.track.addEventListener('cuechange', (e2) => {
+        e1.track.oncuechange = e2 => {
           const cues = e2.currentTarget.activeCues
           const activeTrack = e2.currentTarget.activeCues[0]
 
@@ -265,8 +291,8 @@ export default {
           } else {
             this.activeTrack = activeTrack
           }
-        })
-      })
+        }
+      }
     },
 
     controlsDisplayEventListener() {
@@ -274,11 +300,12 @@ export default {
     },
 
     mouseShowTimeout(e) {
+      console.log('mouse show timeout')
       clearTimeout(this.cursorHideTimeout)
       this.showControls = true
       const controlsRect = document.querySelector('#controls').getBoundingClientRect()
 
-      if (e.clientY < controlsRect.y) {
+      if (e.clientY < controlsRect.y && !this.displayCaptionSelect && !this.displaySpeedSelect) {
         this.cursorHideTimeout = setTimeout(() => {
           this.showControls = false
         }, 1000)
@@ -287,7 +314,7 @@ export default {
   },
 
   created() {
-    document.addEventListener('keyup', this.keydownEventHandler)
+    document.onkeyup = this.keydownEventHandler
   },
 
   mounted() {
@@ -296,7 +323,19 @@ export default {
     this.controlsDisplayEventListener()
   },
 
-  components: {CaptionOptions, SideTracks, ProcessBar, Return, Play, Pause, Sound, Mute, Fullscreen, SubtitleDragUpload, SpeedOptions}
+  components: {
+    CaptionOptions,
+    SideTracks,
+    ProcessBar,
+    Return,
+    Play,
+    Pause,
+    Sound,
+    Mute,
+    Fullscreen,
+    SubtitleDragUpload,
+    SpeedOptions
+  }
 }
 </script>
 

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {Cross} from "@/components/Icons"
+import {Cross} from "@/components/@icons"
 
 export default {
   props: {

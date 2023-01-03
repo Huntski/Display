@@ -31,10 +31,10 @@
 
           <Document class="w-12" />
 
-          <h3 class="font-bold text-lg">Select file</h3>
+          <span class="font-bold text-lg">Select file</span>
         </label>
 
-        <div class="text-white text-sm overflow-hidden w-full flex items-center overflow-ellipsis hover:bg-gray-800 rounded cursor-pointer"
+        <div class="group hover:bg-gray-700 text-white text-sm overflow-hidden w-full flex items-center overflow-ellipsis rounded cursor-pointer"
              v-for="subtitle in subtitles" :key="subtitle.src"
              :class="{'bg-gray-800' : current === subtitle.id}"
         >
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import {Captions, Trashcan, Document} from "@/components/Icons"
+import {Captions, Trashcan, Document} from "@/components/@icons"
 import {Confirmation} from "@/components/Confirmation"
 
 export default {
@@ -73,7 +73,7 @@ export default {
     },
   },
 
-  data() {
+  data: () => {
     return {
       show: false,
       requestedDeletion: null,
@@ -92,16 +92,14 @@ export default {
 
     removeSubtitle(subtitle) {
       this.requestedDeletion = subtitle
-
-      this.$store.dispatch('subtitle/removeSubtitle', subtitle.id).then(() => {
-        this.$parent.getSubtitles()
-      })
     },
 
     removeConfirmation(confirm) {
-      console.log(this.requestedDeletion)
+      console.log('confirm', confirm)
       if (confirm) {
-        this.$store.dispatch('subtitle/removeSubtitle', this.requestedDeletion.id)
+        // this.$store.dispatch('subtitle/removeSubtitle', this.requestedDeletion.id).then(() => {
+        //   this.$parent.getSubtitles()
+        // })
       }
 
       this.requestedDeletion = false
