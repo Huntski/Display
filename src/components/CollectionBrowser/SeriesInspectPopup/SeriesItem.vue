@@ -18,8 +18,7 @@
 
 <script>
 import OptionsMenu from "@/components/OptionsMenu"
-import useDownloadThumbnail from "@/composables/useDownloadThumbnail"
-import {ipcRenderer} from "electron"
+import {downloadThumbnailFromEpisode} from "@/composables/Thumbnails"
 
 export default {
   props: {
@@ -47,20 +46,13 @@ export default {
       })
     },
 
-    async downloadEpisodeThumbnail() {
-      // TODO: Create correct output directory when making thumbnail. Currently it doesn't work if directory does not exist.
+    downloadEpisodeThumbnail() {
+      const thumbnailFilePath = downloadThumbnailFromEpisode(this.episode)
 
-      // console.log(await ipcRenderer.invoke('get-root-directory'))
-
-      const directory = await ipcRenderer.invoke('get-root-directory') + 'public/storage/'
-
-      const thumbnailFileName = `media_${this.episode.media_id}-episode_${this.episode.id}.jpg`
-      const thumbnailFullPath = directory + thumbnailFileName
-
-      useDownloadThumbnail(this.episode.fullPath, thumbnailFullPath)
+      console.log(thumbnailFilePath)
 
       const episode = this.episode
-      episode.thumbnail = 'storage/' + thumbnailFileName
+      episode.thumbnail = thumbnailFilePath
 
       this.$store.dispatch('episode/updateEpisode', episode)
     },

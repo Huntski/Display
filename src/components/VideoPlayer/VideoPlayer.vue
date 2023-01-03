@@ -10,8 +10,7 @@
         </router-link>
 
         <div>
-          <span
-              class="text-white italic text-lg">Watching episode {{ episode ? episode.id : '' }} of {{ media ? media.name : '' }}.</span>
+          <span class="text-white italic text-lg">Watching episode {{ episode ? episode.id : '' }} of {{ media ? media.name : '' }}.</span>
         </div>
 
         <div class="w-7"></div>
@@ -83,7 +82,6 @@ import SideTracks from "./SideTracks"
 import ProcessBar from './ProcessBar'
 import CaptionOptions from "./CaptionOptions"
 import SpeedOptions from "./SpeedOptions"
-import useThumbnail from "@/composables/useDownloadThumbnail"
 
 export default {
   name: 'VideoPlayer',

@@ -6,6 +6,7 @@ import {MediaItem, AnlistMediaItem, MediaEpisode} from "@/types/Media"
 import {Path} from "@/types"
 import {StateMedia as State} from "./types/StateMedia"
 import ScannedMediaResponse from "./types/ScannedMediaResponse"
+import {downloadThumbnail, createThumbnailFileName, publicDirectory} from "@/composables/Thumbnails";
 
 const key: StorageKey = 'media'
 
@@ -45,7 +46,7 @@ export default {
     },
 
     actions: {
-        async loadMediaCollection({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }): Promise<void>  {
+        async loadMediaCollection({commit, dispatch}: { commit: Commit, dispatch: Dispatch }): Promise<void> {
             if (!storage.has('media')) {
                 await dispatch('updateMediaCollection')
             } else {
@@ -53,7 +54,7 @@ export default {
             }
         },
 
-        async updateMediaCollection({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }): Promise<MediaItem[]> {
+        async updateMediaCollection({commit, dispatch}: { commit: Commit, dispatch: Dispatch }): Promise<MediaItem[]> {
             await commit('SET_DISPLAYED_MEDIA', [])
 
             try {
@@ -71,7 +72,7 @@ export default {
             return storage.get('media') as MediaItem[]
         },
 
-        async scanMediaInMainDirectory({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }): Promise<ScannedMediaResponse> {
+        async scanMediaInMainDirectory({commit, dispatch}: { commit: Commit, dispatch: Dispatch }): Promise<ScannedMediaResponse> {
 
             const directory = storage.get('directory') as Path
 
@@ -81,84 +82,103 @@ export default {
                 .map((dirent) => dirent.name)
 
             const result = Array<MediaItem>()
-            let failedAmount = 0
+            const recordResults = {
+                failedAmount: 0,
+                thumbnailsDownloaded: 0,
+                episodesFound: 0
+            }
 
             for (const title of directories) {
                 console.log('Media:', title)
 
-                const searchResult = await dispatch('anilist/searchItem', title, {root:true})
+                const searchResult = await dispatch('anilist/searchItem', title, {root: true})
 
                 console.log('search Result:', searchResult, typeof searchResult)
 
-                dispatch('anilist/searchItem', title, {root:true}).then((media: AnlistMediaItem) => {
-                    const episodeFiles = fs.readdirSync(`${directory}/${title}`, {withFileTypes: true})
+                const media: AnlistMediaItem = await dispatch('anilist/searchItem', title, {root: true})
 
-                    if (media.id === undefined) {
-                        media.id = Math.floor(Math.random() * 99999)
-                    }
+                const episodeFiles = fs.readdirSync(`${directory}/${title}`, {withFileTypes: true})
 
-                    let order = 1
+                if (media.id === undefined) {
+                    media.id = Math.floor(Math.random() * 99999)
+                }
 
-                    episodeFiles.forEach(episodeFile => {
-                        if (episodeFile.name.includes('mp4') || episodeFile.name.includes('mov')) {
-                            dispatch('episode/storeEpisode', {
-                                id: order,
-                                media_id: media.id,
-                                fullPath: `${directory}/${title}/${episodeFile.name}`,
-                                directory: `${directory}/${title}/`,
-                                fileName: `${episodeFile.name}`,
-                                extension: `${episodeFile.name.split('.').pop()}`,
-                                currentTime: 0,
-                            } as MediaEpisode, {root: true})
-                            order++
+                let order = 1
+
+                episodeFiles.forEach(episodeFile => {
+                    if (episodeFile.name.includes('mp4') || episodeFile.name.includes('mov')) {
+                        const fullPath: Path = `${directory}/${title}/${episodeFile.name}`
+                        const thumbnailFileName = createThumbnailFileName(media.id, order)
+                        const thumbnailFullPath = publicDirectory + thumbnailFileName
+
+                        console.log('Create thumbnail:', thumbnailFullPath)
+
+                        downloadThumbnail(fullPath, thumbnailFullPath)
+                        recordResults.thumbnailsDownloaded++
+
+                        const episode: MediaEpisode = {
+                            id: order,
+                            media_id: media.id,
+                            fullPath: fullPath,
+                            directory: `${directory}/${title}/`,
+                            fileName: `${episodeFile.name}`,
+                            extension: `${episodeFile.name.split('.').pop()}`,
+                            currentTime: 0,
+                            thumbnail: thumbnailFileName
                         }
-                    })
 
-                    if (! Object.keys(searchResult).length) {
-                        failedAmount++
-
-                        result.push({
-                            id: media.id,
-                            name: title,
-                            coverImage: '',
-                            color: '',
-                            title: {
-                                romaji: title,
-                                english: title,
-                                native: title,
-                            },
-                            amount: order,
-                            description: media.description ?? '',
-                            currentEpisode: 1,
-                        })
-                    } else {
-                        result.push({
-                            id: media.id,
-                            name: title,
-                            coverImage: media.coverImage.large ?? '',
-                            color: media.coverImage.color ?? '',
-                            title: media.title,
-                            amount: media.episodes ?? order,
-                            description: media.description ?? '',
-                            currentEpisode: 1,
-                        })
+                        dispatch('episode/storeEpisode', episode, {root: true})
+                        recordResults.episodesFound++
+                        order++
                     }
                 })
+
+                if (!Object.keys(searchResult).length) {
+                    recordResults.failedAmount++
+
+                    result.push({
+                        id: media.id,
+                        name: title,
+                        coverImage: '',
+                        color: '',
+                        title: {
+                            romaji: title,
+                            english: title,
+                            native: title,
+                        },
+                        amount: order,
+                        description: media.description ?? '',
+                        currentEpisode: 1,
+                    })
+                } else {
+                    result.push({
+                        id: media.id,
+                        name: title,
+                        coverImage: media.coverImage.large ?? '',
+                        color: media.coverImage.color ?? '',
+                        title: media.title,
+                        amount: media.episodes ?? order,
+                        description: media.description ?? '',
+                        currentEpisode: 1,
+                    })
+                }
             }
 
             storage.set('media', result)
 
             await commit('SET_MEDIA', result)
 
-            console.log('FAILED AMOUNT:', failedAmount)
+            console.log('FAILED AMOUNT:', recordResults.failedAmount)
+            console.log('DOWNLOADED THUMBNAILS:', recordResults.thumbnailsDownloaded)
+            console.log('EPISODES FOUND:', recordResults.episodesFound)
 
             return {
                 result: result,
-                failed: failedAmount
+                recordResults: recordResults,
             }
         },
 
-        async reloadMediaCollection({ dispatch }: { dispatch: Dispatch }): Promise<void> {
+        async reloadMediaCollection({dispatch}: { dispatch: Dispatch }): Promise<void> {
             const response = await dispatch('updateMediaCollection')
 
             dispatch('alerts/notify', {
@@ -175,7 +195,7 @@ export default {
             }
         },
 
-        searchMediaTitle({ commit, state }: { commit: Commit, state: State }, query: string): void {
+        searchMediaTitle({commit, state}: { commit: Commit, state: State }, query: string): void {
             let result
 
             if (query === '') {
@@ -189,7 +209,7 @@ export default {
             commit('SET_DISPLAYED_MEDIA', result)
         },
 
-        getMediaItemById({ commit, state }: { commit: Commit, state: State }, id: number) {
+        getMediaItemById({commit, state}: { commit: Commit, state: State }, id: number) {
             const media = storage.get(key) as Array<MediaItem>
 
             return media.filter(item => item.id == id)[0]
